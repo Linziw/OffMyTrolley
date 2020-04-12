@@ -1,0 +1,2 @@
+class TrolleysController < ApplicationController
+end
