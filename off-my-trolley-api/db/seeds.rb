@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user_a = User.create(username: "Phil67", postcode: "HA7 1aa", email: "phil@hotstuff.com", password: "badger" )
+user_b = User.create(username: "Maud_next_door", postcode: "ha6 7td", email:"maud@maud.com", password: "maud")
+user_c = User.create(username: "Helen_11", postcode: "HA7 4Ad", email:"helen@11.com" , password: "helen")
+user_d = User.create(username: "BananaFarmer", postcode: "ha8 1af", email:"banana@farmer.com" , password: "banana")
+
+trolley_a = Trolley.create(date: "2020-08-20", time: "11:00", supermarket: "Tesco", user: user_a)
+trolley_b = Trolley.create(date: "2020-08-21", time: "12:00", supermarket: "Iceland", user: user_b)
+trolley_c = Trolley.create(date: "2020-08-22", time: "16:00", supermarket: "Sainsburys", user: user_c)
+
