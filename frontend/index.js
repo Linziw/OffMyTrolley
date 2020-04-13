@@ -5,14 +5,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let signup_form = document.getElementById("signup-form");
 
     login_button.addEventListener("click", function(e) {
-        alert("login has been clicked!")
         login_button.classList.add("hidden")
         signup_button.classList.add("hidden")
         login_form.classList.remove("hidden")
     });
 
     signup_button.addEventListener("click", function(e) {
-        alert("signup has been clicked!")
         login_button.classList.add("hidden")
         signup_button.classList.add("hidden")
         signup_form.classList.remove("hidden")
