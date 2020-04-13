@@ -1,5 +1,9 @@
+body {
+    background-color: purple;
+}
+
 h1 {
-    color: red;
+    color: orange;
 }
 
 .hidden {
