@@ -35,13 +35,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let signup_submit = document.getElementById("signup-submit");
             signup_submit.addEventListener("click", (event) => {
                 event.preventDefault();
-                submitForm(signup_form);
+                submitForm();
             })
         });
     }
 
-    function submitForm(form) {
-        let data = new FormData(form)
+    function submitForm() {
+        let form = document.getElementById('signup-form');
+        let formUsername = document.getElementById('su-username').value
+        let formPassword = document.getElementById('su-password').value
+        let formPostcode = document.getElementById('su-postcode').value
+        let data = { username: formUsername, password: formPassword, postcode: formPostcode }
         let configObj = {
             method: 'post',
             headers: {
@@ -50,6 +54,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             },
             body: JSON.stringify(data)
         };
+
         fetch("http://localhost:3000/users", configObj)
             .then(function(response) {
                 return response.json();
