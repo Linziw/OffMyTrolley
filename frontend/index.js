@@ -16,9 +16,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             let login_submit = document.getElementById("login-submit");
             login_submit.addEventListener("click", (event) => {
-                fetch(login_form.action, { method: 'post', body: new FormData(login_form) });
-                console.log('We send post asynchronously (AJAX)');
                 event.preventDefault();
+                submitForm(login_form)
             })
         });
     }
@@ -35,12 +34,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             let signup_submit = document.getElementById("signup-submit");
             signup_submit.addEventListener("click", (event) => {
-                fetch(signup_form.action, { method: 'post', body: new FormData(signup_form) });
-                console.log('We send post asynchronously (AJAX)');
                 event.preventDefault();
+                submitForm(signup_form);
             })
         });
     }
 
+    function submitForm(form) {
+        let data = new FormData(form)
+        let configObj = {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        };
+        fetch("http://localhost:3000/users", configObj)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(object) {
+                console.log(object)
+            })
+    }
 
 })
