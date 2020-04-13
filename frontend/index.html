@@ -17,8 +17,8 @@
     <button type="button" id="login-button">Login</button>
     <button type="button" id="signup-button">Signup</button>
 
-    <div class="hidden" id="login-form">
-        <form action="localhost:3000/users" method="post">
+    <div>
+        <form id="login-form" class="hidden" action="localhost:3000/users" method="post">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
@@ -27,8 +27,8 @@
         </form>
     </div>
 
-    <div class="hidden" id="signup-form">
-        <form action="/users" method="post">
+    <div>
+        <form action="/users" method="post" class="hidden" id="signup-form">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
