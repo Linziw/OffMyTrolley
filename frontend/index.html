@@ -18,24 +18,24 @@
     <button type="button" id="signup-button">Signup</button>
 
     <div class="hidden" id="login-form">
-        <form>
+        <form action="localhost:3000/users" method="post">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
             <input type="text" id="password" name="password"><br>
-            <input type="submit" id="submit" name="submit">
+            <input type="submit" id="login-submit" name="submit">
         </form>
     </div>
 
     <div class="hidden" id="signup-form">
-        <form>
+        <form action="/users" method="post">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password:</label><br>
             <input type="text" id="password" name="password"><br>
             <label for="postcode">Postcode:</label><br>
             <input type="text" id="postcode" name="postcode"><br>
-            <input type="submit" id="submit" name="submit">
+            <input type="submit" id="signup-submit" name="submit">
         </form>
     </div>
 
