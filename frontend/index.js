@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let login_submit = document.getElementById("login-submit");
             login_submit.addEventListener("click", (event) => {
                 event.preventDefault();
-                submitForm(login_form)
+                submitLoginForm()
             })
         });
     }
@@ -35,12 +35,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
             let signup_submit = document.getElementById("signup-submit");
             signup_submit.addEventListener("click", (event) => {
                 event.preventDefault();
-                submitForm();
+                submitSignupForm();
             })
         });
     }
 
-    function submitForm() {
+    function submitSignupForm() {
         let formUsername = document.getElementById('su-username').value
         let formEmail = document.getElementById('su-email').value
         let formPassword = document.getElementById('su-password').value
@@ -56,6 +56,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
         };
 
         fetch("http://localhost:3000/users", configObj)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(object) {
+                console.log(object)
+            })
+    }
+
+    function submitLoginForm() {
+        let formUsername = document.getElementById('li-username').value
+        let formPassword = document.getElementById('li-password').value
+
+        let data = { username: formUsername, password: formPassword }
+        let configObj = {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch("http://localhost:3000/login", configObj)
             .then(function(response) {
                 return response.json();
             })
