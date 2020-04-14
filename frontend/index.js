@@ -41,11 +41,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function submitForm() {
-        let form = document.getElementById('signup-form');
         let formUsername = document.getElementById('su-username').value
+        let formEmail = document.getElementById('su-email').value
         let formPassword = document.getElementById('su-password').value
         let formPostcode = document.getElementById('su-postcode').value
-        let data = { username: formUsername, password: formPassword, postcode: formPostcode }
+        let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode }
         let configObj = {
             method: 'post',
             headers: {
