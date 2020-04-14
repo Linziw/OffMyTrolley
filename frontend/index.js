@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    loginEvents()
-    signupEvents()
+    loginEvents();
+    signupEvents();
+    getTrolleys();
 })
 
 function loginEvents() {
@@ -63,7 +64,7 @@ function submitSignupForm() {
             console.log(object)
         })
     hideForm(signupForm);
-    getTrolleys()
+    displayTrolleys()
 }
 
 function submitLoginForm() {
@@ -89,16 +90,43 @@ function submitLoginForm() {
             console.log(object)
         })
     hideForm(loginForm);
-    getTrolleys()
+    displayTrolleys()
 }
 
 function getTrolleys() {
     fetch('http://localhost:3000/trolleys')
         .then(response =>
             response.json())
-        .then(object => console.log(object))
+        .then(object =>
+            createTrolleys(object))
 }
 
 function hideForm(form) {
     form.classList.add("hidden")
 }
+
+function displayTrolleys() {
+    console.log("heres them trolleys")
+}
+
+function createTrolleys(trolleys) {
+    trolleys.forEach(trolley => {
+        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user_id))
+    });
+
+}
+
+let allTrolleys = []
+
+class Trolley {
+    constructor(date, time, supermarket, space, user_id) {
+        this.date = date;
+        this.time = time;
+        this.supermarket = supermarket;
+        this.space = space;
+        this.user_id = user_id
+    }
+}
+
+//trolley object looks like this
+//{id: 2, date: "2020-08-21", time: "2000-01-01T12:00:00.000Z", supermarket: "Iceland", space: 10, …}
