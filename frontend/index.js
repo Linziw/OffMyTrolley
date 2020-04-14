@@ -106,12 +106,12 @@ function hideForm(form) {
 }
 
 function displayTrolleys() {
-    console.log("heres them trolleys")
+    console.log(allTrolleys)
 }
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user_id))
+        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.postcode, trolley.user.email))
     });
 
 }
@@ -119,12 +119,14 @@ function createTrolleys(trolleys) {
 let allTrolleys = []
 
 class Trolley {
-    constructor(date, time, supermarket, space, user_id) {
+    constructor(date, time, supermarket, space, username, email, postcode) {
         this.date = date;
         this.time = time;
         this.supermarket = supermarket;
         this.space = space;
-        this.user_id = user_id
+        this.username = username;
+        this.email = email;
+        this.postcode = postcode
     }
 }
 
