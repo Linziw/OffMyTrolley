@@ -110,9 +110,77 @@ function displayTrolleys() {
     let trolley_div = document.getElementById("trolleys")
     trolley_div.classList.remove("hidden")
 
+    let divcenter = document.createElement("div")
+    divcenter.classList.add("center")
 
-    allTrolleys.forEach(trolley => {})
+
+
+
+    allTrolleys.forEach(trolley => {
+        let card = document.createElement("div")
+        card.classList.add("card")
+
+        let additional = document.createElement("div")
+        additional.classList.add("additional")
+
+        let usercard = document.createElement("div")
+        usercard.classList.add("user-card")
+
+        let distance = document.createElement("div")
+        distance.classList.add("level")
+        distance.classList.add("center")
+        distance.innerText = trolley.postcode
+
+        let datetime = document.createElement("div")
+        datetime.classList.add("points")
+        datetime.classList.add("center")
+        datetime.innerText = trolley.date
+
+
+
+        let moreinfo = document.createElement("div")
+        moreinfo.classList.add("more_info")
+
+        let h1 = document.createElement("h1")
+        h1.innerText = trolley.username
+
+        let coords = document.createElement("div")
+        coords.classList.add("coords")
+
+        let shopbrand = document.createElement("span")
+        shopbrand.innerText = "Supermarket"
+
+        let supermarket = document.createElement("span")
+        supermarket.innerText = trolley.supermarket
+
+        coords.appendChild(shopbrand)
+        coords.appendChild(supermarket)
+
+
+
+
+        moreinfo.appendChild(h1)
+        moreinfo.appendChild(coords)
+
+        usercard.appendChild(distance)
+        usercard.appendChild(datetime)
+
+
+
+
+        additional.appendChild(usercard)
+        additional.appendChild(moreinfo)
+        card.appendChild(additional)
+
+        divcenter.appendChild(card)
+    })
+
+    trolley_div.appendChild(divcenter)
 }
+
+
+
+
 
 
 function createTrolleys(trolleys) {
