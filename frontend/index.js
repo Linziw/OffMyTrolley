@@ -156,11 +156,46 @@ function displayTrolleys() {
         coords.appendChild(shopbrand)
         coords.appendChild(supermarket)
 
+        let distancemarker = document.createElement("span")
+        distancemarker.innerText = "Distance"
 
+        let d = document.createElement("span")
+        d.innerText = "? miles"
+
+        let coords2 = document.createElement("div")
+        coords2.classList.add("coords")
+
+        coords2.appendChild(distancemarker)
+        coords2.appendChild(d)
+
+        //stats at bottom of card
+
+        let stats = document.createElement("div")
+        stats.classList.add("stats")
+
+        let stat1 = document.createElement("div")
+
+
+        let title = document.createElement("div")
+        title.classList.add("title")
+        title.innerText = "Item spaces"
+
+        let i = document.createElement("div")
+        i.classList.add("value")
+        i.innerText = trolley.space
+
+
+        stat1.appendChild(title)
+        stat1.appendChild(i)
+
+
+        stats.appendChild(stat1)
 
 
         moreinfo.appendChild(h1)
         moreinfo.appendChild(coords)
+        moreinfo.appendChild(coords2)
+        moreinfo.appendChild(stats)
 
         usercard.appendChild(distance)
         usercard.appendChild(datetime)
