@@ -180,3 +180,11 @@ body {
 .hidden {
     display: none
 }
+
+a:link {
+    color: white;
+}
+
+a:hover {
+    color: black;
+}
