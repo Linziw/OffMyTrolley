@@ -107,11 +107,18 @@ function hideForm(form) {
 
 function displayTrolleys() {
     console.log(allTrolleys)
+    let trolley_div = document.getElementById("trolleys")
+    allTrolleys.forEach(trolley => {
+        let basket = document.createElement("p");
+        basket.innerText = `${trolley.date} ${trolley.time} ${trolley.supermarket} ${trolley.username} ${trolley.postcode}`
+        trolley_div.appendChild(basket)
+
+    });
 }
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.postcode, trolley.user.email))
+        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode))
     });
 
 }
