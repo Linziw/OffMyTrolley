@@ -175,7 +175,6 @@ function displayTrolleys() {
 
         let stat1 = document.createElement("div")
 
-
         let title = document.createElement("div")
         title.classList.add("title")
         title.innerText = "Item spaces"
@@ -188,8 +187,41 @@ function displayTrolleys() {
         stat1.appendChild(title)
         stat1.appendChild(i)
 
+        let stat2 = document.createElement("div")
+
+        let title2 = document.createElement("div")
+        title2.classList.add("title")
+        title2.innerText = "Contact"
+
+        let i2 = document.createElement("div")
+        i2.classList.add("value")
+        i2.innerText = "@"
+
+
+        stat2.appendChild(title2)
+        stat2.appendChild(i2)
+
 
         stats.appendChild(stat1)
+        stats.appendChild(stat2)
+
+        //general information
+
+        let general = document.createElement("div")
+        general.classList.add("general")
+
+        let generalh1 = document.createElement("h1")
+        generalh1.innerText = trolley.username
+
+        let generalp = document.createElement("p")
+        generalp.innerText = `"${trolley.username} has a delivery slot booked for ${trolley.date} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
+
+
+
+        general.appendChild(generalh1)
+        general.appendChild(generalp)
+
+
 
 
         moreinfo.appendChild(h1)
@@ -206,6 +238,7 @@ function displayTrolleys() {
         additional.appendChild(usercard)
         additional.appendChild(moreinfo)
         card.appendChild(additional)
+        card.appendChild(general)
 
         divcenter.appendChild(card)
     })
