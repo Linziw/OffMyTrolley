@@ -193,9 +193,10 @@ function displayTrolleys() {
         title2.classList.add("title")
         title2.innerText = "Contact"
 
-        let i2 = document.createElement("div")
+        let i2 = document.createElement("a")
         i2.classList.add("value")
         i2.innerText = "@"
+        i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....please reply to this email to confirm and arrange details, thanks!`
 
 
         stat2.appendChild(title2)
@@ -270,6 +271,14 @@ class Trolley {
         this.email = email;
         this.postcode = postcode
     }
+}
+
+
+function sendMail(trolley) {
+    var link = 'mailto:hello@domain.com?subject=Message from ' +
+        document.getElementById('email_address').value +
+        '&body=' + document.getElementById('email_address').value;
+    window.location.href = link;
 }
 
 //trolley object looks like this
