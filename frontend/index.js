@@ -130,7 +130,7 @@ function displayTrolleys() {
         usercard.classList.add("user-card")
 
         let moreinfo = document.createElement("div")
-        moreinfo.classList.add("more_info")
+        moreinfo.classList.add("more-info")
 
         let general = document.createElement("div")
         general.classList.add("general")
@@ -242,12 +242,13 @@ function displayTrolleys() {
         //append level 3
         additional.appendChild(usercard)
         additional.appendChild(moreinfo)
-        card.appendChild(general)
+
 
 
         //append level 2
 
         card.appendChild(additional)
+        card.appendChild(general)
 
         //append top level
         divcenter.appendChild(card)
