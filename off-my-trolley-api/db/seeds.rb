@@ -11,7 +11,7 @@ user_b = User.create(username: "Maud_next_door", postcode: "ha6 7td", email:"mau
 user_c = User.create(username: "Helen_11", postcode: "HA7 4Ad", email:"helen@11.com" , password: "helen")
 user_d = User.create(username: "BananaFarmer", postcode: "ha8 1af", email:"banana@farmer.com" , password: "banana")
 
-trolley_a = Trolley.create(date: "2020-08-20", time: "11:00", supermarket: "Tesco", user: user_a, space: 15)
-trolley_b = Trolley.create(date: "2020-08-21", time: "12:00", supermarket: "Iceland", user: user_b, space: 10)
-trolley_c = Trolley.create(date: "2020-08-22", time: "16:00", supermarket: "Sainsburys", user: user_c, space: 10)
+trolley_a = Trolley.create(date: "20-08-2020", time: "11:00", supermarket: "Tesco", user: user_a, space: 15)
+trolley_b = Trolley.create(date: "21-08-2020", time: "12:00", supermarket: "Iceland", user: user_b, space: 10)
+trolley_c = Trolley.create(date: "22-08-2020", time: "16:00", supermarket: "Sainsburys", user: user_c, space: 10)
 

@@ -161,7 +161,8 @@ function displayTrolleys() {
 
         let generalp = document.createElement("p")
         generalp.innerText = `"${trolley.username} has a delivery slot booked for 
-        ${formatDate(trolley)} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
+        ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
+
 
         //4th level part 2
 
@@ -256,7 +257,6 @@ function displayTrolleys() {
         divcenter.appendChild(card)
 
         toggle += 1
-        console.log(toggle)
     })
 
     document.body.appendChild(divcenter)
@@ -306,4 +306,9 @@ function findImage(trolley) {
 function formatDate(trolley) {
     let split = trolley.date.split("-")
     return split.reverse().join("-")
+}
+
+function formatTime(trolley) {
+    split = trolley.time.split("")
+    return split.slice(11, 16).join("")
 }
