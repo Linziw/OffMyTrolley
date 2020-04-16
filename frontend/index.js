@@ -146,6 +146,9 @@ function displayTrolleys() {
 
         let image = document.createElement("img")
         image.classList.add("center")
+        if (toggle % 2 == 0) {
+            image.id = "green"
+        }
         image.src = findImage(trolley)
 
         let datetime = document.createElement("div")
