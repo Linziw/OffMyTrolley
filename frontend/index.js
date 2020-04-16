@@ -111,13 +111,15 @@ function displayTrolleys() {
     let divcenter = document.createElement("div")
     divcenter.classList.add("center")
 
-
-
+    let toggle = 0
 
     allTrolleys.forEach(trolley => {
         //top level
         let card = document.createElement("div")
         card.classList.add("card")
+        if (toggle % 2 == 0)
+            card.classList.add("green")
+
 
         //2nd level
 
@@ -144,7 +146,7 @@ function displayTrolleys() {
 
         let image = document.createElement("img")
         image.classList.add("center")
-        image.src = "images/tesco.png"
+        image.src = findImage(trolley)
 
         let datetime = document.createElement("div")
         datetime.classList.add("points")
@@ -243,17 +245,16 @@ function displayTrolleys() {
         additional.appendChild(usercard)
         additional.appendChild(moreinfo)
 
-
-
         //append level 2
-
         card.appendChild(additional)
         card.appendChild(general)
 
         //append top level
         divcenter.appendChild(card)
-    })
 
+        toggle += 1
+        console.log(toggle)
+    })
 
     document.body.appendChild(divcenter)
 }
@@ -294,3 +295,7 @@ function sendMail(trolley) {
 
 //trolley object looks like this
 //{id: 2, date: "2020-08-21", time: "2000-01-01T12:00:00.000Z", supermarket: "Iceland", space: 10, …}
+
+function findImage(trolley) {
+    return `images/${trolley.supermarket}.jpg`
+}
