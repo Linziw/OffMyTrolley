@@ -154,14 +154,14 @@ function displayTrolleys() {
         let datetime = document.createElement("div")
         datetime.classList.add("points")
         datetime.classList.add("center")
-        datetime.innerText = trolley.date
+        datetime.innerText = formatDate(trolley)
 
         let generalh1 = document.createElement("h1")
         generalh1.innerText = trolley.username
 
         let generalp = document.createElement("p")
         generalp.innerText = `"${trolley.username} has a delivery slot booked for 
-        ${trolley.date} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
+        ${formatDate(trolley)} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
 
         //4th level part 2
 
@@ -301,4 +301,9 @@ function sendMail(trolley) {
 
 function findImage(trolley) {
     return `images/${trolley.supermarket}.jpg`
+}
+
+function formatDate(trolley) {
+    let split = trolley.date.split("-")
+    return split.reverse().join("-")
 }
