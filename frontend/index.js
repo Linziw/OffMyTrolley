@@ -107,8 +107,6 @@ function hideForm(form) {
 
 function displayTrolleys() {
     console.log(allTrolleys)
-    let trolley_div = document.getElementById("trolleys")
-    trolley_div.classList.remove("hidden")
 
     let divcenter = document.createElement("div")
     divcenter.classList.add("center")
@@ -117,14 +115,27 @@ function displayTrolleys() {
 
 
     allTrolleys.forEach(trolley => {
+        //top level
         let card = document.createElement("div")
         card.classList.add("card")
+
+        //2nd level
 
         let additional = document.createElement("div")
         additional.classList.add("additional")
 
+        //3rd level
+
         let usercard = document.createElement("div")
         usercard.classList.add("user-card")
+
+        let moreinfo = document.createElement("div")
+        moreinfo.classList.add("more_info")
+
+        let general = document.createElement("div")
+        general.classList.add("general")
+
+        //4th level part 1
 
         let distance = document.createElement("div")
         distance.classList.add("level")
@@ -140,10 +151,14 @@ function displayTrolleys() {
         datetime.classList.add("center")
         datetime.innerText = trolley.date
 
+        let generalh1 = document.createElement("h1")
+        generalh1.innerText = trolley.username
 
+        let generalp = document.createElement("p")
+        generalp.innerText = `"${trolley.username} has a delivery slot booked for 
+        ${trolley.date} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
 
-        let moreinfo = document.createElement("div")
-        moreinfo.classList.add("more_info")
+        //4th level part 2
 
         let h1 = document.createElement("h1")
         h1.innerText = trolley.username
@@ -151,14 +166,19 @@ function displayTrolleys() {
         let coords = document.createElement("div")
         coords.classList.add("coords")
 
+        let coords2 = document.createElement("div")
+        coords2.classList.add("coords")
+
+        let stats = document.createElement("div")
+        stats.classList.add("stats")
+
+        //5th level
+
         let shopbrand = document.createElement("span")
         shopbrand.innerText = "Supermarket"
 
         let supermarket = document.createElement("span")
         supermarket.innerText = trolley.supermarket
-
-        coords.appendChild(shopbrand)
-        coords.appendChild(supermarket)
 
         let distancemarker = document.createElement("span")
         distancemarker.innerText = "Distance"
@@ -166,16 +186,7 @@ function displayTrolleys() {
         let d = document.createElement("span")
         d.innerText = "? miles"
 
-        let coords2 = document.createElement("div")
-        coords2.classList.add("coords")
-
-        coords2.appendChild(distancemarker)
-        coords2.appendChild(d)
-
         //stats at bottom of card
-
-        let stats = document.createElement("div")
-        stats.classList.add("stats")
 
         let stat1 = document.createElement("div")
 
@@ -186,10 +197,6 @@ function displayTrolleys() {
         let i = document.createElement("div")
         i.classList.add("value")
         i.innerText = trolley.space
-
-
-        stat1.appendChild(title)
-        stat1.appendChild(i)
 
         let stat2 = document.createElement("div")
 
@@ -203,54 +210,51 @@ function displayTrolleys() {
         i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
         please reply to this email to confirm and arrange details, thanks!`
 
-
+        //append stats
+        stat1.appendChild(title)
+        stat1.appendChild(i)
         stat2.appendChild(title2)
         stat2.appendChild(i2)
 
-
+        //append level 5
+        coords.appendChild(shopbrand)
+        coords.appendChild(supermarket)
+        coords2.appendChild(distancemarker)
+        coords2.appendChild(d)
         stats.appendChild(stat1)
         stats.appendChild(stat2)
 
-        //general information
-
-        let general = document.createElement("div")
-        general.classList.add("general")
-
-        let generalh1 = document.createElement("h1")
-        generalh1.innerText = trolley.username
-
-        let generalp = document.createElement("p")
-        generalp.innerText = `"${trolley.username} has a delivery slot booked for ${trolley.date} at ${trolley.time} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
-
-
-
-        general.appendChild(generalh1)
-        general.appendChild(generalp)
-
-
-
+        //append level 4 part 2
 
         moreinfo.appendChild(h1)
         moreinfo.appendChild(coords)
         moreinfo.appendChild(coords2)
         moreinfo.appendChild(stats)
 
+        //append level 4 part 1
+
+        general.appendChild(generalh1)
+        general.appendChild(generalp)
         usercard.appendChild(distance)
         usercard.appendChild(image)
         usercard.appendChild(datetime)
 
-
-
-
+        //append level 3
         additional.appendChild(usercard)
         additional.appendChild(moreinfo)
-        card.appendChild(additional)
         card.appendChild(general)
 
+
+        //append level 2
+
+        card.appendChild(additional)
+
+        //append top level
         divcenter.appendChild(card)
     })
 
-    trolley_div.appendChild(divcenter)
+
+    document.body.appendChild(divcenter)
 }
 
 
