@@ -131,6 +131,10 @@ function displayTrolleys() {
         distance.classList.add("center")
         distance.innerText = trolley.postcode
 
+        let image = document.createElement("img")
+        image.classList.add("center")
+        image.src = "images/tesco.png"
+
         let datetime = document.createElement("div")
         datetime.classList.add("points")
         datetime.classList.add("center")
@@ -232,6 +236,7 @@ function displayTrolleys() {
         moreinfo.appendChild(stats)
 
         usercard.appendChild(distance)
+        usercard.appendChild(image)
         usercard.appendChild(datetime)
 
 
