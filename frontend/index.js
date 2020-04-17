@@ -105,6 +105,10 @@ function hideForm(form) {
     form.classList.add("hidden")
 }
 
+function showForm(form) {
+    form.classList.remove("hidden")
+}
+
 function displayTrolleys() {
     console.log(allTrolleys)
 
@@ -260,6 +264,7 @@ function displayTrolleys() {
     })
 
     document.body.appendChild(divcenter)
+    showForm(document.getElementsByClassName("add-trolley")[0])
 }
 
 
