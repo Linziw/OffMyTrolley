@@ -12,7 +12,7 @@ class TrolleysController < ApplicationController
   def create
     newtrolley = Trolley.create(user_id: params[:user_id], date: params[:date], time: params[:time], supermarket: params[:supermarket], space: params[:space])
     if newtrolley.persisted?
-      render json: newtrolley
+      render json: TrolleySerializer.new(newtrolley).to_serialized_json
     else
       render json:{message: 'the trolley didnt save!'}
     end

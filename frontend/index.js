@@ -348,7 +348,6 @@ function plusButtonEvents() {
 }
 
 function submitTrolleyForm() {
-    alert("youve submitted the form!!")
     let new_trolley_form = document.getElementById("new_trolley_form")
     let user_id = session_id
     let formDate = document.getElementById('t-date').value
@@ -371,6 +370,9 @@ function submitTrolleyForm() {
         })
         .then(function(trolley) {
             console.log(trolley)
+            let faketrolleys = []
+            faketrolleys.push(trolley)
+            createTrolleys(faketrolleys)
         })
     hideForm(new_trolley_form);
     displayTrolleys()
