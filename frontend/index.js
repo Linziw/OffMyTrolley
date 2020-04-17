@@ -336,14 +336,38 @@ function plusButtonEvents() {
 
         hideForm(document.getElementById("trolley-display"))
 
-        // let new_trolley_submit = document.getElementById("new_trolley_submit");
-        // new_trolley_submit.addEventListener("click", (event) => {
-        //     event.preventDefault();
-        //     submitTrolleyForm();
-        // })
+        let new_trolley_submit = document.getElementById("new_trolley_submit");
+        new_trolley_submit.addEventListener("click", (event) => {
+            event.preventDefault();
+            submitTrolleyForm();
+        })
     })
 }
 
 function submitTrolleyForm() {
+    alert("youve submitted the form!!")
+    let new_trolley_form = document.getElementById("new_trolley_form")
+    let formDate = document.getElementById('t-date').value
+    let formTime = document.getElementById('t-time').value
+    let formSupermarket = document.getElementById('t-supermarket').value
+    let formSpace = document.getElementById('t-space').value
+    let data = { date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
+    let configObj = {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+    };
 
+    fetch("http://localhost:3000/trolleys", configObj)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(trolley) {
+            console.log(trolley)
+        })
+    hideForm(new_trolley_form);
+    displayTrolleys()
 }
