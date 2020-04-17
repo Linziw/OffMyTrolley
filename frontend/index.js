@@ -63,8 +63,8 @@ function submitSignupForm() {
         .then(function(user) {
             console.log(user)
             let welcome = document.createElement("h2")
-            welcome.innerText = "Welcome, user"
-            heading = getElementById("heading")
+            welcome.innerText = `Welcome ${user.username}, choose a trolley`
+            let heading = document.getElementById("heading")
             heading.append(welcome)
         })
     hideForm(signupForm);
@@ -150,7 +150,6 @@ function displayTrolleys() {
         distance.innerText = trolley.postcode
 
         let image = document.createElement("img")
-            //image.classList.add("center")
         if (toggle % 2 == 0) {
             image.id = "green"
         }
