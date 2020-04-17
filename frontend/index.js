@@ -61,11 +61,7 @@ function submitSignupForm() {
             return response.json();
         })
         .then(function(user) {
-            console.log(user)
-            let welcome = document.createElement("h2")
-            welcome.innerText = `Welcome ${user.username}, choose a trolley`
-            let heading = document.getElementById("heading")
-            heading.append(welcome)
+            displayUser(user)
         })
     hideForm(signupForm);
     displayTrolleys()
@@ -90,8 +86,8 @@ function submitLoginForm() {
         .then(function(response) {
             return response.json();
         })
-        .then(function(object) {
-            console.log(object)
+        .then(function(user) {
+            displayUser(user, "back")
         })
     hideForm(loginForm);
     displayTrolleys()
@@ -315,4 +311,11 @@ function formatDate(trolley) {
 function formatTime(trolley) {
     split = trolley.time.split("")
     return split.slice(11, 16).join("")
+}
+
+function displayUser(user, greeting = "") {
+    let welcome = document.createElement("h2")
+    welcome.innerText = `Welcome ${greeting} ${user.username}, choose a trolley`
+    let heading = document.getElementById("heading")
+    heading.append(welcome)
 }
