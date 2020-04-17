@@ -1,8 +1,10 @@
+let session_id = ""
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
     signupEvents();
     getTrolleys();
     plusButtonEvents();
+
 })
 
 function loginEvents() {
@@ -88,6 +90,7 @@ function submitLoginForm() {
             return response.json();
         })
         .then(function(user) {
+            session_id = user.id
             displayUser(user, "back")
         })
     hideForm(loginForm);
@@ -347,11 +350,12 @@ function plusButtonEvents() {
 function submitTrolleyForm() {
     alert("youve submitted the form!!")
     let new_trolley_form = document.getElementById("new_trolley_form")
+    let user_id = session_id
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
-    let data = { date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
+    let data = { user_id: user_id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
     let configObj = {
         method: 'post',
         headers: {
