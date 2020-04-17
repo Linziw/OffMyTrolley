@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
     signupEvents();
     getTrolleys();
+    plusButtonEvents();
 })
 
 function loginEvents() {
@@ -323,4 +324,26 @@ function displayUser(user, greeting = "") {
     welcome.innerText = `Welcome ${greeting} ${user.username}, choose a trolley`
     let heading = document.getElementById("heading")
     heading.append(welcome)
+}
+
+function plusButtonEvents() {
+    let plusButton = document.getElementsByClassName("add-trolley")[0];
+
+
+    plusButton.addEventListener("click", function(e) {
+        hideForm(plusButton);
+        new_trolley_form.classList.remove("hidden")
+
+        hideForm(document.getElementById("trolley-display"))
+
+        // let new_trolley_submit = document.getElementById("new_trolley_submit");
+        // new_trolley_submit.addEventListener("click", (event) => {
+        //     event.preventDefault();
+        //     submitTrolleyForm();
+        // })
+    })
+}
+
+function submitTrolleyForm() {
+
 }

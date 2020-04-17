@@ -46,3 +46,17 @@
     <div class="add-trolley hidden">
         <img id="plus" src="images/plus.png">
     </div>
+
+    <div>
+        <form action="/trolleys" method="post" class="hidden" id="new_trolley_form">
+            <label for="t-date">Date:</label><br>
+            <input type="date" id="t-date" name="t-date"><br>
+            <label for="time">Time:</label><br>
+            <input type="time" id="t-time" name="t-time"><br>
+            <label for="t-supermarket">Supermarket:</label><br>
+            <input type="text" id="t-supermarket" name="t-supermarket"><br>
+            <label for="t-space">Space for how many items?:</label><br>
+            <input type="integer" id="t-space" name="t-space"><br>
+            <input type="submit" id="new_trolley_submit" name="submit">
+        </form>
+    </div>
