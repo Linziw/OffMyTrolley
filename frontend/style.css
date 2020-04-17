@@ -8,7 +8,7 @@ body {
 
 .center {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
 }
@@ -194,6 +194,7 @@ img {
     height: 110px;
     border-radius: 20px;
     border: 3px solid rgb(223, 100, 89);
+    margin-top: 65px;
 }
 
 #green {
@@ -202,4 +203,8 @@ img {
     border-radius: 20px;
     border: 3px solid rgb(120, 155, 137);
     ;
+}
+
+div #heading {
+    position: absolute;
 }
