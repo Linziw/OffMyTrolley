@@ -241,6 +241,7 @@ function makeCard(trolley) {
     //top level
     let card = document.createElement("div")
     card.classList.add("card")
+    card.id = trolley.id
     if (toggle % 2 == 0)
         card.classList.add("green")
 
