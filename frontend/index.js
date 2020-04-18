@@ -340,7 +340,7 @@ function makeCard(trolley) {
     i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
     please reply to this email to confirm and arrange details, thanks!`
     i2.addEventListener("click", function(e) {
-        //make somefunction here to delete the trolley from database and dom
+        deleteTrolley(trolley)
     })
 
     //append stats
@@ -385,4 +385,27 @@ function makeCard(trolley) {
     toggle += 1
 
     return card
+}
+
+function deleteTrolley(trolley) {
+    let card = document.getElementById(trolley.id)
+    hideForm(card)
+        //post fetch request to delete from database
+    let configObj = {
+        method: 'delete',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(trolley)
+    };
+
+    fetch(`http://localhost:3000/trolleys/${trolley.id}`, configObj)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(confirmation) {
+
+            console.log(confirmation)
+        })
 }

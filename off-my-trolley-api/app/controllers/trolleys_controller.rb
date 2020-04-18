@@ -17,4 +17,10 @@ class TrolleysController < ApplicationController
       render json:{message: 'the trolley didnt save!'}
     end
   end
+
+  def destroy
+    trolley = Trolley.find_by(id: params[:id])
+    trolley.destroy
+    render json:{message: 'the trolley has been destroyed!'}
+  end
 end
