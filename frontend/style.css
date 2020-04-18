@@ -7,10 +7,10 @@ body {
 }
 
 .center {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
@@ -194,7 +194,6 @@ img {
     height: 110px;
     border-radius: 20px;
     border: 3px solid rgb(223, 100, 89);
-    margin-top: 65px;
 }
 
 #green {
@@ -226,4 +225,15 @@ div #heading {
     margin-top: 0px;
     border: none;
     padding-top: 5px
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-image {
+    margin: 20px 0;
 }

@@ -274,6 +274,7 @@ function makeCard(trolley) {
         image.id = "green"
     }
     image.src = findImage(trolley)
+    image.classList.add("card-image")
 
     let datetime = document.createElement("div")
     datetime.classList.add("points")
