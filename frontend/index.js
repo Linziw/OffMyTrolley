@@ -1,4 +1,5 @@
 let session_id = ""
+let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
     signupEvents();
@@ -120,154 +121,10 @@ function displayTrolleys() {
     divcenter.classList.add("center")
     divcenter.id = "trolley-display"
 
-    let toggle = 0
-
-    allTrolleys.forEach(trolley => {
-        //top level
-        let card = document.createElement("div")
-        card.classList.add("card")
-        if (toggle % 2 == 0)
-            card.classList.add("green")
 
 
-        //2nd level
-
-        let additional = document.createElement("div")
-        additional.classList.add("additional")
-
-        //3rd level
-
-        let usercard = document.createElement("div")
-        usercard.classList.add("user-card")
-
-        let moreinfo = document.createElement("div")
-        moreinfo.classList.add("more-info")
-
-        let general = document.createElement("div")
-        general.classList.add("general")
-
-        //4th level part 1
-
-        let distance = document.createElement("div")
-        distance.classList.add("level")
-        distance.classList.add("center")
-        distance.innerText = trolley.postcode
-
-        let image = document.createElement("img")
-        if (toggle % 2 == 0) {
-            image.id = "green"
-        }
-        image.src = findImage(trolley)
-
-        let datetime = document.createElement("div")
-        datetime.classList.add("points")
-        datetime.classList.add("center")
-        datetime.innerText = formatDate(trolley)
-
-        let generalh1 = document.createElement("h1")
-        generalh1.innerText = trolley.username
-
-        let generalp = document.createElement("p")
-        generalp.innerText = `"${trolley.username} has a delivery slot booked for 
-        ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
-
-
-        //4th level part 2
-
-        let h1 = document.createElement("h1")
-        h1.innerText = trolley.username
-
-        let coords = document.createElement("div")
-        coords.classList.add("coords")
-
-        let coords2 = document.createElement("div")
-        coords2.classList.add("coords")
-
-        let stats = document.createElement("div")
-        stats.classList.add("stats")
-
-        //5th level
-
-        let shopbrand = document.createElement("span")
-        shopbrand.innerText = "Supermarket"
-
-        let supermarket = document.createElement("span")
-        supermarket.innerText = trolley.supermarket
-
-        let distancemarker = document.createElement("span")
-        distancemarker.innerText = "Distance"
-
-        let d = document.createElement("span")
-        d.innerText = "? miles"
-
-        //stats at bottom of card
-
-        let stat1 = document.createElement("div")
-
-        let title = document.createElement("div")
-        title.classList.add("title")
-        title.innerText = "Item spaces"
-
-        let i = document.createElement("div")
-        i.classList.add("value")
-        i.innerText = trolley.space
-
-        let stat2 = document.createElement("div")
-
-        let title2 = document.createElement("div")
-        title2.classList.add("title")
-        title2.innerText = "Contact"
-
-        let i2 = document.createElement("a")
-        i2.classList.add("value")
-        i2.innerText = "@"
-        i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
-        please reply to this email to confirm and arrange details, thanks!`
-
-        //append stats
-        stat1.appendChild(title)
-        stat1.appendChild(i)
-        stat2.appendChild(title2)
-        stat2.appendChild(i2)
-
-        //append level 5
-        coords.appendChild(shopbrand)
-        coords.appendChild(supermarket)
-        coords2.appendChild(distancemarker)
-        coords2.appendChild(d)
-        stats.appendChild(stat1)
-        stats.appendChild(stat2)
-
-        //append level 4 part 2
-
-        moreinfo.appendChild(h1)
-        moreinfo.appendChild(coords)
-        moreinfo.appendChild(coords2)
-        moreinfo.appendChild(stats)
-
-        //append level 4 part 1
-
-        general.appendChild(generalh1)
-        general.appendChild(generalp)
-        usercard.appendChild(distance)
-        usercard.appendChild(image)
-        usercard.appendChild(datetime)
-
-        //append level 3
-        additional.appendChild(usercard)
-        additional.appendChild(moreinfo)
-
-        //append level 2
-        card.appendChild(additional)
-        card.appendChild(general)
-
-        //append top level
-        divcenter.appendChild(card)
-
-        toggle += 1
-    })
-
-    document.body.appendChild(divcenter)
+    allTrolleys.forEach(trolley => divcenter.appendChild(makeCard(trolley)));
+    document.body.appendChild(divcenter);
     showForm(document.getElementsByClassName("add-trolley")[0])
 }
 
@@ -355,6 +212,7 @@ function submitTrolleyForm() {
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
     let data = { user_id: user_id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
+    let divcenter = document.getElementById("trolley-display")
     let configObj = {
         method: 'post',
         headers: {
@@ -369,11 +227,158 @@ function submitTrolleyForm() {
             return response.json();
         })
         .then(function(trolley) {
+
             console.log(trolley)
-            let faketrolleys = []
-            faketrolleys.push(trolley)
-            createTrolleys(faketrolleys)
+            divcenter.appendChild(makeCard(trolley))
         })
+    showForm(divcenter)
+    showForm(document.getElementsByClassName("add-trolley")[0])
     hideForm(new_trolley_form);
-    displayTrolleys()
+}
+
+function makeCard(trolley) {
+    //top level
+    let card = document.createElement("div")
+    card.classList.add("card")
+    if (toggle % 2 == 0)
+        card.classList.add("green")
+
+
+    //2nd level
+
+    let additional = document.createElement("div")
+    additional.classList.add("additional")
+
+    //3rd level
+
+    let usercard = document.createElement("div")
+    usercard.classList.add("user-card")
+
+    let moreinfo = document.createElement("div")
+    moreinfo.classList.add("more-info")
+
+    let general = document.createElement("div")
+    general.classList.add("general")
+
+    //4th level part 1
+
+    let distance = document.createElement("div")
+    distance.classList.add("level")
+    distance.classList.add("center")
+    distance.innerText = trolley.postcode
+
+    let image = document.createElement("img")
+    if (toggle % 2 == 0) {
+        image.id = "green"
+    }
+    image.src = findImage(trolley)
+
+    let datetime = document.createElement("div")
+    datetime.classList.add("points")
+    datetime.classList.add("center")
+    datetime.innerText = formatDate(trolley)
+
+    let generalh1 = document.createElement("h1")
+    generalh1.innerText = trolley.username
+
+    let generalp = document.createElement("p")
+    generalp.innerText = `"${trolley.username} has a delivery slot booked for 
+    ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
+
+
+    //4th level part 2
+
+    let h1 = document.createElement("h1")
+    h1.innerText = trolley.username
+
+    let coords = document.createElement("div")
+    coords.classList.add("coords")
+
+    let coords2 = document.createElement("div")
+    coords2.classList.add("coords")
+
+    let stats = document.createElement("div")
+    stats.classList.add("stats")
+
+    //5th level
+
+    let shopbrand = document.createElement("span")
+    shopbrand.innerText = "Supermarket"
+
+    let supermarket = document.createElement("span")
+    supermarket.innerText = trolley.supermarket
+
+    let distancemarker = document.createElement("span")
+    distancemarker.innerText = "Distance"
+
+    let d = document.createElement("span")
+    d.innerText = "? miles"
+
+    //stats at bottom of card
+
+    let stat1 = document.createElement("div")
+
+    let title = document.createElement("div")
+    title.classList.add("title")
+    title.innerText = "Item spaces"
+
+    let i = document.createElement("div")
+    i.classList.add("value")
+    i.innerText = trolley.space
+
+    let stat2 = document.createElement("div")
+
+    let title2 = document.createElement("div")
+    title2.classList.add("title")
+    title2.innerText = "Contact"
+
+    let i2 = document.createElement("a")
+    i2.classList.add("value")
+    i2.innerText = "@"
+    i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
+    please reply to this email to confirm and arrange details, thanks!`
+
+    //append stats
+    stat1.appendChild(title)
+    stat1.appendChild(i)
+    stat2.appendChild(title2)
+    stat2.appendChild(i2)
+
+    //append level 5
+    coords.appendChild(shopbrand)
+    coords.appendChild(supermarket)
+    coords2.appendChild(distancemarker)
+    coords2.appendChild(d)
+    stats.appendChild(stat1)
+    stats.appendChild(stat2)
+
+    //append level 4 part 2
+
+    moreinfo.appendChild(h1)
+    moreinfo.appendChild(coords)
+    moreinfo.appendChild(coords2)
+    moreinfo.appendChild(stats)
+
+    //append level 4 part 1
+
+    general.appendChild(generalh1)
+    general.appendChild(generalp)
+    usercard.appendChild(distance)
+    usercard.appendChild(image)
+    usercard.appendChild(datetime)
+
+    //append level 3
+    additional.appendChild(usercard)
+    additional.appendChild(moreinfo)
+
+    //append level 2
+    card.appendChild(additional)
+    card.appendChild(general)
+
+    //append top level
+    //divcenter.appendChild(card)
+
+    toggle += 1
+
+    return card
 }
