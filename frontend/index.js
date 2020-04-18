@@ -135,7 +135,7 @@ function displayTrolleys() {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode))
+        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode))
     });
 
 }
@@ -143,7 +143,8 @@ function createTrolleys(trolleys) {
 let allTrolleys = []
 
 class Trolley {
-    constructor(date, time, supermarket, space, username, email, postcode) {
+    constructor(id, date, time, supermarket, space, username, email, postcode) {
+        this.id = id
         this.date = date;
         this.time = time;
         this.supermarket = supermarket;
@@ -337,6 +338,9 @@ function makeCard(trolley) {
     i2.innerText = "@"
     i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
     please reply to this email to confirm and arrange details, thanks!`
+    i2.addEventListener("click", function(e) {
+        //make somefunction here to delete the trolley from database and dom
+    })
 
     //append stats
     stat1.appendChild(title)
@@ -376,7 +380,6 @@ function makeCard(trolley) {
     card.appendChild(general)
 
     //append top level
-    //divcenter.appendChild(card)
 
     toggle += 1
 
