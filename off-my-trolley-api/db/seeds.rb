@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user_a = User.create(username: "Phil67", postcode: "HA7 1aa", email: "phil@hotstuff.com", password: "badger" )
-user_b = User.create(username: "Maud_next_door", postcode: "ha6 7td", email:"maud@maud.com", password: "maud")
-user_c = User.create(username: "Helen_11", postcode: "HA7 4Ad", email:"helen@11.com" , password: "helen")
-user_d = User.create(username: "BananaFarmer", postcode: "ha8 1af", email:"banana@farmer.com" , password: "banana")
+user_a = User.create(username: "Phil67", postcode: "HA7 1aa", email: "phil@hotstuff.com", password: "badger", longitude:"-0.302326", latitude:"51.605553" )
+user_b = User.create(username: "Maud_next_door", postcode: "DN40 2HD", email:"maud@maud.com", password: "maud", longitude:"-0.227526", latitude:"53.617426")
+user_c = User.create(username: "Helen_11", postcode: "BH23 3NN", email:"helen@11.com" , password: "helen", longitude:"-1.746858", latitude:"50.728856")
+user_d = User.create(username: "BananaFarmer", postcode: "DH5 9NH", email:"banana@farmer.com" , password: "banana", longitude:"-1.478372", latitude:"54.824577")
 
 trolley_a = Trolley.create(date: "20-08-2020", time: "11:00", supermarket: "Tesco", user: user_a, space: 15)
 trolley_b = Trolley.create(date: "21-08-2020", time: "12:00", supermarket: "Iceland", user: user_b, space: 10)
