@@ -66,6 +66,7 @@ function submitSignupForm() {
             return response.json();
         })
         .then(function(user) {
+            session_id = user.id
             displayUser(user)
         })
     hideForm(signupForm);
