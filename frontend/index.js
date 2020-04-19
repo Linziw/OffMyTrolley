@@ -1,4 +1,5 @@
 let session_id = ""
+let allTrolleys = []
 let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
@@ -133,7 +134,7 @@ function createTrolleys(trolleys) {
 
 }
 
-let allTrolleys = []
+
 
 class Trolley {
     constructor(id, date, time, supermarket, space, username, email, postcode) {
@@ -334,7 +335,7 @@ function makeCard(trolley) {
     i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
     please reply to this email to confirm and arrange details, thanks!`
     i2.addEventListener("click", function(e) {
-        deleteTrolley(trolley)
+        domDeleteTrolley(trolley)
     })
 
     //append stats
@@ -380,6 +381,11 @@ function makeCard(trolley) {
 
     return card
 }
+
+function domDeleteTrolley(trolley) {
+    document.getElementById(trolley.id).remove()
+}
+
 
 function deleteTrolley(trolley) {
     let card = document.getElementById(trolley.id)
