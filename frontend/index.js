@@ -52,39 +52,39 @@ function submitSignupForm() {
     let formEmail = document.getElementById('su-email').value
     let formPassword = document.getElementById('su-password').value
     let formPostcode = document.getElementById('su-postcode').value
-    let userLatitude
-    let userLongitude
 
     fetch(`http://api.postcodes.io/postcodes/${formPostcode}`)
-        .then(function(response) {
-            return response.json();
-        }).then(function(postcodeJson) {
-            userLatitude = (postcodeJson.result.latitude)
-            userLongitude = (postcodeJson.result.longitude)
-        })
+        .then(res => res.json())
+        .then(data => obj = data)
+        .then(() => {
+            let userLongitude = obj.result.longitude
+            let userLatitude = obj.result.latitude
 
-    let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
-    let configObj = {
-        method: 'post',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(data)
-    };
+            let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
+            let configObj = {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(data)
+            };
 
-    fetch("http://localhost:3000/users", configObj)
-        .then(function(response) {
-            return response.json();
+            fetch("http://localhost:3000/users", configObj)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(user) {
+                    session_id = user.id
+                    user_postcode = user.postcode
+                    console.log(user)
+                    displayUser(user)
+                })
+            hideForm(signupForm);
+            displayTrolleys()
         })
-        .then(function(user) {
-            session_id = user.id
-            user_postcode = user.postcode
-            displayUser(user)
-        })
-    hideForm(signupForm);
-    displayTrolleys()
 }
+
 
 function submitLoginForm() {
     let loginForm = document.getElementById("login-form");
