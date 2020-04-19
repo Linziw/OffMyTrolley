@@ -130,7 +130,7 @@ function displayTrolleys() {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode))
+        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode, trolley.user_id))
     });
 
 }
@@ -138,7 +138,7 @@ function createTrolleys(trolleys) {
 
 
 class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode) {
+    constructor(id, date, time, supermarket, space, username, email, postcode, user_id) {
         this.id = id
         this.date = date;
         this.time = time;
@@ -146,7 +146,8 @@ class Trolley {
         this.space = space;
         this.username = username;
         this.email = email;
-        this.postcode = postcode
+        this.postcode = postcode;
+        this.user_id = user_id;
     }
 }
 
@@ -258,9 +259,7 @@ function makeCard(trolley) {
     general.classList.add("general")
 
     //4th level part 1
-    let d_button = document.createElement("img")
-    d_button.src = "images/delete.png"
-    d_button.classList.add("delete")
+
 
     let distance = document.createElement("div")
     distance.classList.add("level")
@@ -278,6 +277,11 @@ function makeCard(trolley) {
     datetime.classList.add("points")
     datetime.classList.add("center")
     datetime.innerText = formatDate(trolley)
+
+    let d_button = document.createElement("img")
+    d_button.src = "images/delete.png"
+    d_button.classList.add("delete")
+
 
     let generalh1 = document.createElement("h1")
     generalh1.innerText = trolley.username
@@ -371,7 +375,10 @@ function makeCard(trolley) {
     usercard.appendChild(distance)
     usercard.appendChild(image)
     usercard.appendChild(datetime)
-    usercard.appendChild(d_button)
+    if (trolley.user_id == session_id) {
+        usercard.appendChild(d_button)
+    }
+
 
     //append level 3
     additional.appendChild(usercard)
