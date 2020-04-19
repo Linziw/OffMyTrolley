@@ -1,4 +1,5 @@
 let session_id = ""
+let user_postcode = ""
 let allTrolleys = []
 let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -51,7 +52,18 @@ function submitSignupForm() {
     let formEmail = document.getElementById('su-email').value
     let formPassword = document.getElementById('su-password').value
     let formPostcode = document.getElementById('su-postcode').value
-    let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode }
+    let userLatitude
+    let userLongitude
+
+    fetch(`http://api.postcodes.io/postcodes/${formPostcode}`)
+        .then(function(response) {
+            return response.json();
+        }).then(function(postcodeJson) {
+            userLatitude = (postcodeJson.result.latitude)
+            userLongitude = (postcodeJson.result.longitude)
+        })
+
+    let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
     let configObj = {
         method: 'post',
         headers: {
@@ -67,6 +79,7 @@ function submitSignupForm() {
         })
         .then(function(user) {
             session_id = user.id
+            user_postcode = user.postcode
             displayUser(user)
         })
     hideForm(signupForm);
