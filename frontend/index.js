@@ -258,6 +258,9 @@ function makeCard(trolley) {
     general.classList.add("general")
 
     //4th level part 1
+    let d_button = document.createElement("img")
+    d_button.src = "images/delete.png"
+    d_button.classList.add("delete")
 
     let distance = document.createElement("div")
     distance.classList.add("level")
@@ -364,9 +367,11 @@ function makeCard(trolley) {
 
     general.appendChild(generalh1)
     general.appendChild(generalp)
+
     usercard.appendChild(distance)
     usercard.appendChild(image)
     usercard.appendChild(datetime)
+    usercard.appendChild(d_button)
 
     //append level 3
     additional.appendChild(usercard)

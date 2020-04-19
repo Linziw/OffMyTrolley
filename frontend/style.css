@@ -237,3 +237,11 @@ div #heading {
 .card-image {
     margin: 20px 0;
 }
+
+.delete {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 0px;
+    margin-top: 6px;
+}
