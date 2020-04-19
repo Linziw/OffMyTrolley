@@ -4,23 +4,20 @@
 
 <head>
     <meta charset="utf-8">
-
     <title>OffMyTrolley</title>
-
     <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
 </head>
 
-<body id="body">
-
-    <div id="heading">
+<body>
+    <header id="heading">
         <h1>OffMyTrolley</h1>
-    </div>
+    </header>
 
     <button type="button" id="login-button">Login</button>
     <button type="button" id="signup-button">Signup</button>
 
-    <div>
+    <forms>
         <form id="login-form" class="hidden" action="/users" method="post">
             <label for="username">Username:</label><br>
             <input type="text" id="li-username" name="username"><br>
@@ -28,9 +25,7 @@
             <input type="password" id="li-password" name="password"><br>
             <input type="submit" id="login-submit" name="submit">
         </form>
-    </div>
 
-    <div>
         <form action="/users" method="post" class="hidden" id="signup-form">
             <label for="username">Username:</label><br>
             <input type="text" id="su-email" name="email"><br>
@@ -42,13 +37,7 @@
             <input type="text" id="su-postcode" name="postcode"><br>
             <input type="submit" id="signup-submit" name="submit">
         </form>
-    </div>
 
-    <div class="add-trolley hidden">
-        <img id="plus" src="images/plus.png">
-    </div>
-
-    <div>
         <form action="/trolleys" method="post" class="hidden" id="new_trolley_form">
             <label for="t-date">Date:</label><br>
             <input type="date" id="t-date" name="t-date"><br>
@@ -60,4 +49,12 @@
             <input type="integer" id="t-space" name="t-space"><br>
             <input type="submit" id="new_trolley_submit" name="submit">
         </form>
-    </div>
+    </forms>
+
+    <trolley-display class="center">
+    </trolley-display>
+
+
+    <footer>
+        <img class="add-trolley hidden" src="images/plus.png">
+    </footer>

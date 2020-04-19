@@ -116,15 +116,8 @@ function showForm(form) {
 
 function displayTrolleys() {
     console.log(allTrolleys)
-
-    let divcenter = document.createElement("div")
-    divcenter.classList.add("center")
-    divcenter.id = "trolley-display"
-
-
-
-    allTrolleys.forEach(trolley => divcenter.appendChild(makeCard(trolley)));
-    document.body.appendChild(divcenter);
+    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
+    allTrolleys.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
 }
 
@@ -190,12 +183,11 @@ function displayUser(user, greeting = "") {
 function plusButtonEvents() {
     let plusButton = document.getElementsByClassName("add-trolley")[0];
 
-
     plusButton.addEventListener("click", function(e) {
         hideForm(plusButton);
         new_trolley_form.classList.remove("hidden")
 
-        hideForm(document.getElementById("trolley-display"))
+        hideForm(document.getElementsByTagName("trolley-display")[0])
 
         let new_trolley_submit = document.getElementById("new_trolley_submit");
         new_trolley_submit.addEventListener("click", (event) => {
@@ -212,8 +204,9 @@ function submitTrolleyForm() {
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
+    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     let data = { user_id: user_id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
-    let divcenter = document.getElementById("trolley-display")
+
     let configObj = {
         method: 'post',
         headers: {
@@ -230,9 +223,9 @@ function submitTrolleyForm() {
         .then(function(trolley) {
 
             console.log(trolley)
-            divcenter.appendChild(makeCard(trolley))
+            trolleydisplay.appendChild(makeCard(trolley))
         })
-    showForm(divcenter)
+    showForm(trolleydisplay)
     showForm(document.getElementsByClassName("add-trolley")[0])
     hideForm(new_trolley_form);
 }
