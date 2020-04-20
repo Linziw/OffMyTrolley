@@ -1,8 +1,9 @@
 let session_id = ""
-let user_postcode = ""
+let user_postcode
 let userLongitude = ""
 let userLatitude = ""
 let allTrolleys = []
+
 let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
@@ -145,7 +146,9 @@ function displayTrolleys() {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode, trolley.user_id, trolley.user.longitude, trolley.user.latitude))
+        console.log(HaversineDistance(trolley.user.latitude, trolley.user.longitude, userLatitude, userLatitude))
+        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
+            trolley.user.postcode, trolley.user_id, trolley.user.longitude, trolley.user.latitude, HaversineDistance(trolley.user.latitude, trolley.user.longitude, userLatitude, userLatitude)))
     });
 
 }
@@ -153,7 +156,7 @@ function createTrolleys(trolleys) {
 
 
 class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, longitude, latitude) {
+    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, longitude, latitude, distance) {
         this.id = id
         this.date = date;
         this.time = time;
@@ -165,24 +168,26 @@ class Trolley {
         this.user_id = user_id;
         this.longitude = parseFloat(longitude);
         this.latitude = parseFloat(latitude)
-    }
-    getHaversineDistance = (lat1, lon1, lat2, lon2) => {
-        const earthRadius = 6371; // km 
-
-        const diffLat = (lat2 - lat1) * Math.PI / 180;
-        const diffLng = (lon2 - lon1) * Math.PI / 180;
-
-        const arc = Math.cos(
-                lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(diffLng / 2) * Math.sin(diffLng / 2) +
-            Math.sin(diffLat / 2) * Math.sin(diffLat / 2);
-        const line = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
-
-        const distance = earthRadius * line;
-
-        return distance;
+        this.distance = distance
     }
 
+}
+
+function HaversineDistance(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371; // km 
+
+    const diffLat = (lat2 - lat1) * Math.PI / 180;
+    const diffLng = (lon2 - lon1) * Math.PI / 180;
+
+    const arc = Math.cos(
+            lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(diffLng / 2) * Math.sin(diffLng / 2) +
+        Math.sin(diffLat / 2) * Math.sin(diffLat / 2);
+    const line = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
+
+    const distance = earthRadius * line;
+
+    return distance;
 }
 
 
@@ -355,7 +360,7 @@ function makeCard(trolley) {
     distancemarker.innerText = "Distance"
 
     let d = document.createElement("span")
-    d.innerText = "? miles"
+    d.innerText = `${trolley.distance} kms`
 
     //stats at bottom of card
 
