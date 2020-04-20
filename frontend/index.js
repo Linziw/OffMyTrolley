@@ -1,5 +1,7 @@
 let session_id = ""
 let user_postcode = ""
+let userLongitude = ""
+let userLatitude = ""
 let allTrolleys = []
 let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -57,8 +59,8 @@ function submitSignupForm() {
         .then(res => res.json())
         .then(data => obj = data)
         .then(() => {
-            let userLongitude = obj.result.longitude
-            let userLatitude = obj.result.latitude
+            userLongitude = obj.result.longitude
+            userLatitude = obj.result.latitude
 
             let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
             let configObj = {
@@ -161,10 +163,35 @@ class Trolley {
         this.email = email;
         this.postcode = postcode;
         this.user_id = user_id;
-        this.longitude = longitude;
-        this.latitude = latitude
+        this.longitude = parseFloat(longitude);
+        this.latitude = parseFloat(latitude)
+    }
+
+    distance(lat1, lon1, lat2, lon2) {
+        Number.prototype.toRadians = function() {
+            return this * Math.PI / 180;
+        }
+
+        //Haversine formula
+        let R = 6371e3;
+        let φ1 = lat1.toRadians();
+        let φ2 = lat2.toRadians();
+        let Δφ = (lat2 - lat1).toRadians();
+        let Δλ = (lon2 - lon1).toRadians();
+
+        let a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+            Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        let d = R * c;
+        return d
     }
 }
+
+
+
+
 
 
 function sendMail(trolley) {
