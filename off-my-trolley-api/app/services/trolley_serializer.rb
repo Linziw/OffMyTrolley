@@ -7,7 +7,7 @@ class TrolleySerializer
     options = {
       include: {
         user: {
-          only: [:username, :postcode, :email],
+          only: [:username, :postcode, :email, :longitude, :latitude],
         },
       },
       except: [:created_at, :updated_at],

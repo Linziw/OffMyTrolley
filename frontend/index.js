@@ -117,8 +117,8 @@ function getTrolleys() {
     fetch('http://localhost:3000/trolleys')
         .then(response =>
             response.json())
-        .then(object =>
-            createTrolleys(object))
+        .then(object => createTrolleys(object))
+
 }
 
 function hideForm(form) {
@@ -143,7 +143,7 @@ function displayTrolleys() {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode, trolley.user_id))
+        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email, trolley.user.postcode, trolley.user_id, trolley.user.longitude, trolley.user.latitude))
     });
 
 }
@@ -151,7 +151,7 @@ function createTrolleys(trolleys) {
 
 
 class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode, user_id) {
+    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, longitude, latitude) {
         this.id = id
         this.date = date;
         this.time = time;
@@ -161,6 +161,8 @@ class Trolley {
         this.email = email;
         this.postcode = postcode;
         this.user_id = user_id;
+        this.longitude = longitude;
+        this.latitude = latitude
     }
 }
 
