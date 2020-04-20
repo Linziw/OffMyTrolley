@@ -166,27 +166,23 @@ class Trolley {
         this.longitude = parseFloat(longitude);
         this.latitude = parseFloat(latitude)
     }
+    getHaversineDistance = (lat1, lon1, lat2, lon2) => {
+        const earthRadius = 6371; // km 
 
-    distance(lat1, lon1, lat2, lon2) {
-        Number.prototype.toRadians = function() {
-            return this * Math.PI / 180;
-        }
+        const diffLat = (lat2 - lat1) * Math.PI / 180;
+        const diffLng = (lon2 - lon1) * Math.PI / 180;
 
-        //Haversine formula
-        let R = 6371e3;
-        let φ1 = lat1.toRadians();
-        let φ2 = lat2.toRadians();
-        let Δφ = (lat2 - lat1).toRadians();
-        let Δλ = (lon2 - lon1).toRadians();
+        const arc = Math.cos(
+                lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(diffLng / 2) * Math.sin(diffLng / 2) +
+            Math.sin(diffLat / 2) * Math.sin(diffLat / 2);
+        const line = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
 
-        let a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-            Math.cos(φ1) * Math.cos(φ2) *
-            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = earthRadius * line;
 
-        let d = R * c;
-        return d
+        return distance;
     }
+
 }
 
 
