@@ -146,17 +146,15 @@ function displayTrolleys() {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        console.log(HaversineDistance(trolley.user.latitude, trolley.user.longitude, userLatitude, userLatitude))
         allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
-            trolley.user.postcode, trolley.user_id, trolley.user.longitude, trolley.user.latitude, HaversineDistance(trolley.user.latitude, trolley.user.longitude, userLatitude, userLatitude)))
+            trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude)))
     });
 
 }
 
 
-
 class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, longitude, latitude, distance) {
+    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, latitude, longitude) {
         this.id = id
         this.date = date;
         this.time = time;
@@ -166,34 +164,30 @@ class Trolley {
         this.email = email;
         this.postcode = postcode;
         this.user_id = user_id;
-        this.longitude = parseFloat(longitude);
-        this.latitude = parseFloat(latitude)
-        this.distance = distance
+        this.latitude = latitude;
+        this.longitude = longitude;
+
+
+    }
+
+    get distance() {
+        let R = 6371; // Radius of the earth in km
+        let dLat = deg2rad(userLatitude - this.latitude); // deg2rad below
+        let dLon = deg2rad(userLongitude - this.longitude);
+        let a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(userLatitude)) * Math.cos(deg2rad(this.latitude)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        let d = R * c; // Distance in km
+        return d;
     }
 
 }
 
-function HaversineDistance(lat1, lon1, lat2, lon2) {
-    const earthRadius = 6371; // km 
-
-    const diffLat = (lat2 - lat1) * Math.PI / 180;
-    const diffLng = (lon2 - lon1) * Math.PI / 180;
-
-    const arc = Math.cos(
-            lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(diffLng / 2) * Math.sin(diffLng / 2) +
-        Math.sin(diffLat / 2) * Math.sin(diffLat / 2);
-    const line = 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
-
-    const distance = earthRadius * line;
-
-    return distance;
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
 }
-
-
-
-
-
 
 function sendMail(trolley) {
     var link = 'mailto:hello@domain.com?subject=Message from ' +
@@ -360,7 +354,7 @@ function makeCard(trolley) {
     distancemarker.innerText = "Distance"
 
     let d = document.createElement("span")
-    d.innerText = `${trolley.distance} kms`
+    d.innerText = `${Math.round(trolley.distance * 10) / 10} kms`
 
     //stats at bottom of card
 
