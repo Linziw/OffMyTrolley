@@ -217,7 +217,7 @@ function formatTime(trolley) {
 
 function displayUser(user, greeting = "") {
     let welcome = document.createElement("h2")
-    welcome.innerText = `Welcome ${greeting} ${user.username}, choose a trolley`
+    welcome.innerText = `Welcome ${greeting} ${user.username}, choose a trolley delivery, or add one of your own `
     let heading = document.getElementById("heading")
     heading.append(welcome)
 }
@@ -276,6 +276,8 @@ function submitTrolleyForm() {
     showForm(document.getElementsByClassName("add-trolley")[0])
     hideForm(new_trolley_form);
 }
+//This section is just for making the cards
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function makeCard(trolley) {
     //top level
@@ -325,6 +327,10 @@ function makeCard(trolley) {
     let d_button = document.createElement("img")
     d_button.src = "images/delete.png"
     d_button.classList.add("delete")
+    d_button.addEventListener("click", e => {
+        alert("You've deleted your trolley");
+        deleteTrolley(trolley)
+    })
 
 
     let generalh1 = document.createElement("h1")
@@ -385,7 +391,7 @@ function makeCard(trolley) {
     i2.classList.add("value")
     i2.innerText = "@"
     i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
-    please reply to this email to confirm and arrange details, thanks!`
+    please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks!`
     i2.addEventListener("click", function(e) {
         domDeleteTrolley(trolley)
     })
@@ -438,6 +444,7 @@ function makeCard(trolley) {
 
     return card
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function domDeleteTrolley(trolley) {
     document.getElementById(trolley.id).remove()
