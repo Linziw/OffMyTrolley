@@ -4,6 +4,15 @@ let userLongitude = ""
 let userLatitude = ""
 let allTrolleys = []
 
+function allsortedbydistance() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.distance;
+        var thingB = b.distance;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
+
+
 let toggle = 0
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents();
@@ -135,14 +144,9 @@ function showForm(form) {
 function displayTrolleys() {
     console.log(allTrolleys)
     let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
-    allTrolleys.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
+    allsortedbydistance().forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
 }
-
-
-
-
-
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
@@ -166,8 +170,6 @@ class Trolley {
         this.user_id = user_id;
         this.latitude = latitude;
         this.longitude = longitude;
-
-
     }
 
     get distance() {
