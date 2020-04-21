@@ -230,6 +230,8 @@ function plusButtonEvents() {
         new_trolley_form.classList.remove("hidden")
 
         hideForm(document.getElementsByTagName("trolley-display")[0])
+        h2 = document.getElementsByTagName("h2")[0]
+        hideForm(h2)
 
         let new_trolley_submit = document.getElementById("new_trolley_submit");
         new_trolley_submit.addEventListener("click", (event) => {
@@ -264,8 +266,11 @@ function submitTrolleyForm() {
         })
         .then(function(trolley) {
 
-            console.log(trolley)
-            trolleydisplay.appendChild(makeCard(trolley))
+            newtrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
+                trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude))
+            allTrolleys.push(newtrolley)
+            console.log(allTrolleys)
+            trolleydisplay.appendChild(makeCard(newtrolley))
         })
     showForm(trolleydisplay)
     showForm(document.getElementsByClassName("add-trolley")[0])
