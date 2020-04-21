@@ -310,7 +310,7 @@ function makeCard(trolley) {
     let distance = document.createElement("div")
     distance.classList.add("level")
     distance.classList.add("center")
-    distance.innerText = trolley.postcode
+    distance.innerText = `${Math.round(trolley.distance * 10) / 10} kms`
 
     let image = document.createElement("img")
     if (toggle % 2 == 0) {
@@ -363,11 +363,11 @@ function makeCard(trolley) {
     let supermarket = document.createElement("span")
     supermarket.innerText = trolley.supermarket
 
-    let distancemarker = document.createElement("span")
-    distancemarker.innerText = "Distance"
+    let postcodemarker = document.createElement("span")
+    postcodemarker.innerText = "Postcode"
 
     let d = document.createElement("span")
-    d.innerText = `${Math.round(trolley.distance * 10) / 10} kms`
+    d.innerText = trolley.postcode
 
     //stats at bottom of card
 
@@ -405,7 +405,7 @@ function makeCard(trolley) {
     //append level 5
     coords.appendChild(shopbrand)
     coords.appendChild(supermarket)
-    coords2.appendChild(distancemarker)
+    coords2.appendChild(postcodemarker)
     coords2.appendChild(d)
     stats.appendChild(stat1)
     stats.appendChild(stat2)
