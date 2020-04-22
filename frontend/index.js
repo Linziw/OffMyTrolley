@@ -271,6 +271,15 @@ function submitTrolleyForm() {
     showForm(document.getElementsByClassName("add-trolley")[0])
     hideForm(new_trolley_form);
 }
+
+//eventually use this to refactor code!!
+function alternativemakeCard(trolley) {
+    let card = document.createElement("div")
+    card.innerHTML =
+        `<div class = "card green">`
+    return card
+}
+
 //This section is just for making the cards
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
