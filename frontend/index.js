@@ -79,18 +79,15 @@ function submitSignupForm() {
             };
 
             fetch("http://localhost:3000/users", configObj)
-                .then(function(response) {
-                    return response.json();
+                .then(response => response.json())
+                .then(result => {
+                    userObject = result
+                    console.log(userObject)
+                    displayTrolleys();
+                    displayUser(userObject)
+                    hideForm(signupForm);
                 })
-                .then(function(user) {
-                    session_id = user.id
-                    user_postcode = user.postcode
-                    console.log(user)
-                    displayUser(user)
-                    displaySortButtons()
-                })
-            hideForm(signupForm);
-            displayTrolleys()
+
         })
 }
 
