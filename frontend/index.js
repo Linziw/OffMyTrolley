@@ -120,6 +120,9 @@ function submitLoginForm() {
         })
         .then(function(user) {
             session_id = user.id
+            userLatitude = parseFloat(user.latitude)
+            userLongitude = parseFloat(user.longitude)
+            user_postcode = user.postcode
             displayUser(user, "back")
         })
     hideForm(loginForm);
