@@ -91,6 +91,7 @@ function submitSignupForm() {
                     user_postcode = user.postcode
                     console.log(user)
                     displayUser(user)
+                    displaySortButtons()
                 })
             hideForm(signupForm);
             displayTrolleys()
@@ -472,4 +473,13 @@ function deleteTrolley(trolley) {
 
             console.log(confirmation)
         })
+}
+
+function displaySortButtons() {
+    let header = document.getElementsByTagName("header")[0]
+    let sortButtons = document.createElement("div")
+    sortButtons.innerHTML = "<button>Sort by Distance</button> <button>Sort by Date</button>"
+    sortButtons.classList.add("sortButton")
+
+    header.appendChild(sortButtons)
 }
