@@ -86,6 +86,7 @@ function submitSignupForm() {
                     displayTrolleys();
                     displayUser(userObject)
                     hideForm(signupForm);
+                    displaySortButtons()
                 })
 
         })
@@ -115,6 +116,7 @@ function submitLoginForm() {
             displayTrolleys();
             displayUser(userObject, "back")
             hideForm(loginForm);
+            displaySortButtons()
         })
 
 
@@ -220,12 +222,14 @@ function displayUser(userObject, greeting = "") {
 
 function plusButtonEvents() {
     let plusButton = document.getElementsByClassName("add-trolley")[0];
-
     plusButton.addEventListener("click", function(e) {
         hideForm(plusButton);
+        hideForm(document.getElementsByClassName("sortButton")[0])
+
         new_trolley_form.classList.remove("hidden")
 
         hideForm(document.getElementsByTagName("trolley-display")[0])
+
         h2 = document.getElementsByTagName("h2")[0]
         hideForm(h2)
 
