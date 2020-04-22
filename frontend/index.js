@@ -138,7 +138,6 @@ function showForm(form) {
 
 function displayTrolleys() {
     console.log(allTrolleys)
-    console.log("me4th - display trolleys")
     let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     allsortedbydistance().forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
@@ -169,7 +168,6 @@ class Trolley {
     }
 
     get distance() {
-        console.log(userObject)
         let R = 6371; // Radius of the earth in km
         let dLat = deg2rad(parseFloat(userObject.latitude) - this.latitude); // deg2rad below
         let dLon = deg2rad(parseFloat(userObject.longitude) - this.longitude);
@@ -241,13 +239,12 @@ function plusButtonEvents() {
 
 function submitTrolleyForm() {
     let new_trolley_form = document.getElementById("new_trolley_form")
-    let user_id = session_id
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
     let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
-    let data = { user_id: user_id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
+    let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
     let configObj = {
         method: 'post',
@@ -279,7 +276,6 @@ function submitTrolleyForm() {
 
 function makeCard(trolley) {
     //top level
-    console.log("me 5th - make card")
     let card = document.createElement("div")
     card.classList.add("card")
     card.id = trolley.id
