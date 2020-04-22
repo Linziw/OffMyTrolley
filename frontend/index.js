@@ -1,8 +1,14 @@
-let session_id = ""
-let user_postcode
-let userLongitude = ""
-let userLatitude = ""
 let allTrolleys = []
+let toggle = 0
+let userObject
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    loginEvents();
+    signupEvents();
+    getTrolleys();
+    plusButtonEvents();
+
+})
 
 function allsortedbydistance() {
     return allTrolleys.sort(function(a, b) {
@@ -11,16 +17,6 @@ function allsortedbydistance() {
         return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
     })
 }
-
-
-let toggle = 0
-window.addEventListener('DOMContentLoaded', (event) => {
-    loginEvents();
-    signupEvents();
-    getTrolleys();
-    plusButtonEvents();
-
-})
 
 function loginEvents() {
     let login_button = document.getElementById("login-button");
@@ -115,18 +111,16 @@ function submitLoginForm() {
     };
 
     fetch("http://localhost:3000/login", configObj)
-        .then(function(response) {
-            return response.json();
+        .then(response => response.json())
+        .then(result => {
+            userObject = result
+            console.log(userObject)
+            displayTrolleys();
+            displayUser(userObject, "back")
+            hideForm(loginForm);
         })
-        .then(function(user) {
-            session_id = user.id
-            userLatitude = parseFloat(user.latitude)
-            userLongitude = parseFloat(user.longitude)
-            user_postcode = user.postcode
-            displayUser(user, "back")
-        })
-    hideForm(loginForm);
-    displayTrolleys()
+
+
 }
 
 function getTrolleys() {
@@ -147,6 +141,7 @@ function showForm(form) {
 
 function displayTrolleys() {
     console.log(allTrolleys)
+    console.log("me4th - display trolleys")
     let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     allsortedbydistance().forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
@@ -177,15 +172,17 @@ class Trolley {
     }
 
     get distance() {
+        console.log(userObject)
         let R = 6371; // Radius of the earth in km
-        let dLat = deg2rad(userLatitude - this.latitude); // deg2rad below
-        let dLon = deg2rad(userLongitude - this.longitude);
+        let dLat = deg2rad(parseFloat(userObject.latitude) - this.latitude); // deg2rad below
+        let dLon = deg2rad(parseFloat(userObject.longitude) - this.longitude);
         let a =
             Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(deg2rad(userLatitude)) * Math.cos(deg2rad(this.latitude)) *
+            Math.cos(deg2rad(parseFloat(userObject.latitude))) * Math.cos(deg2rad(this.latitude)) *
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         let d = R * c; // Distance in km
+
         return d;
     }
 
@@ -219,9 +216,9 @@ function formatTime(trolley) {
     return split.slice(11, 16).join("")
 }
 
-function displayUser(user, greeting = "") {
+function displayUser(userObject, greeting = "") {
     let welcome = document.createElement("h2")
-    welcome.innerText = `Welcome ${greeting} ${user.username}, choose a trolley delivery, or add one of your own `
+    welcome.innerText = `Welcome ${greeting} ${userObject.username}, choose a trolley delivery, or add one of your own `
     let heading = document.getElementById("heading")
     heading.append(welcome)
 }
@@ -285,6 +282,7 @@ function submitTrolleyForm() {
 
 function makeCard(trolley) {
     //top level
+    console.log("me 5th - make card")
     let card = document.createElement("div")
     card.classList.add("card")
     card.id = trolley.id
@@ -429,7 +427,7 @@ function makeCard(trolley) {
     usercard.appendChild(distance)
     usercard.appendChild(image)
     usercard.appendChild(datetime)
-    if (trolley.user_id == session_id) {
+    if (trolley.user_id == userObject.id) {
         usercard.appendChild(d_button)
     }
 
