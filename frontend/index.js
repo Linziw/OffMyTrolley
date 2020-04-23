@@ -244,6 +244,17 @@ function plusButtonEvents() {
         h2 = document.getElementsByTagName("h2")[0]
         hideForm(h2)
 
+        let cancel = document.getElementById("cancel");
+        cancel.addEventListener("click", (event) => {
+            event.preventDefault();
+            hideForm(new_trolley_form);
+            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+            showForm((document.getElementsByTagName("trolley-display")[0]))
+            showForm(document.getElementsByClassName("add-trolley")[0])
+
+        })
+
+
         let new_trolley_submit = document.getElementById("new_trolley_submit");
         new_trolley_submit.addEventListener("click", (event) => {
             event.preventDefault();
