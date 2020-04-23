@@ -271,9 +271,11 @@ function submitTrolleyForm() {
             console.log(allTrolleys)
             trolleydisplay.appendChild(makeCard(newtrolley))
         })
+    hideForm(new_trolley_form);
+    document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
     showForm(trolleydisplay)
     showForm(document.getElementsByClassName("add-trolley")[0])
-    hideForm(new_trolley_form);
+
 }
 
 //eventually use this to refactor code!!
