@@ -487,8 +487,22 @@ function deleteTrolley(trolley) {
 function displaySortButtons() {
     let header = document.getElementsByTagName("header")[0]
     let sortButtons = document.createElement("div")
-    sortButtons.innerHTML = "<button>Sort by Distance</button> <button>Sort by Date</button>"
     sortButtons.classList.add("sortButton")
 
+    let distanceButton = document.createElement("button")
+    let dateButton = document.createElement("button")
+    distanceButton.innerHTML = "Sort by Distance"
+    dateButton.innerHTML = "Sort by Date"
+
+    distanceButton.addEventListener("click", function(e) {
+        alert("ive been clicked")
+    })
+
+    dateButton.addEventListener("click", function(e) {
+        alert("ive been clicked")
+    })
+
+    sortButtons.appendChild(dateButton)
+    sortButtons.appendChild(distanceButton)
     header.appendChild(sortButtons)
 }
