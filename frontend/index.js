@@ -98,6 +98,12 @@ function submitSignupForm() {
                 })
 
         })
+        .catch(function(error) {
+            alert("Bad Postcode!");
+            console.log(error.message)
+        })
+
+
 }
 
 
@@ -125,10 +131,13 @@ function submitLoginForm() {
             displayUser(userObject, "back")
             hideForm(loginForm);
             displaySortButtons()
+
         })
-
-
 }
+
+
+
+
 
 function getTrolleys() {
     fetch('http://localhost:3000/trolleys')
