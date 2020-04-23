@@ -18,6 +18,14 @@ function allsortedbydistance() {
     })
 }
 
+function allsortedbydate() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.date;
+        var thingB = b.date;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
+
 function loginEvents() {
     let login_button = document.getElementById("login-button");
     let login_form = document.getElementById("login-form");
@@ -138,11 +146,14 @@ function showForm(form) {
     form.classList.remove("hidden")
 }
 
-function displayTrolleys() {
+function displayTrolleys(sortOption = allsortedbydistance()) {
     console.log(allTrolleys)
-    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
-    allsortedbydistance().forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
+    let trolleydisplay = document.createElement("trolley-display")
+    trolleydisplay.classList.add("center")
+        //let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
+    sortOption.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
+    document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
 }
 
 function createTrolleys(trolleys) {
@@ -499,7 +510,10 @@ function displaySortButtons() {
     })
 
     dateButton.addEventListener("click", function(e) {
-        alert("ive been clicked")
+        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
+        console.log(oldTrolleys)
+        oldTrolleys.parentNode.removeChild(oldTrolleys);
+        displayTrolleys(allsortedbydate())
     })
 
     sortButtons.appendChild(dateButton)
