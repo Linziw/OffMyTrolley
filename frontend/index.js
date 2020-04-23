@@ -506,7 +506,10 @@ function displaySortButtons() {
     dateButton.innerHTML = "Sort by Date"
 
     distanceButton.addEventListener("click", function(e) {
-        alert("ive been clicked")
+        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
+        console.log(oldTrolleys)
+        oldTrolleys.parentNode.removeChild(oldTrolleys);
+        displayTrolleys(allsortedbydistance())
     })
 
     dateButton.addEventListener("click", function(e) {
