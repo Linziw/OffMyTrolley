@@ -133,6 +133,9 @@ function submitLoginForm() {
             displaySortButtons()
 
         })
+        .catch(function(error) {
+            alert("We cannot verify you, please try again");
+        })
 }
 
 
