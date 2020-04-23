@@ -1,13 +1,13 @@
-let allTrolleys = []
-let toggle = 0
-let userObject
+let allTrolleys = [] // A place to keep all of the Trolley objects once created.
+let toggle = 0 // The counter for toggling the card colours
+let userObject // Where the object for the current user is stored
 
+// initial page load
 window.addEventListener('DOMContentLoaded', (event) => {
-    loginEvents();
-    signupEvents();
-    getTrolleys();
-    plusButtonEvents();
-
+    loginEvents(); //make login button clickable
+    signupEvents(); //make signup button clickable
+    getTrolleys(); //fetch the trolleys from RAILS in the backgroud
+    plusButtonEvents(); //make a plus button to add new trolleys (hidden at first)
 })
 
 function allsortedbydistance() {
