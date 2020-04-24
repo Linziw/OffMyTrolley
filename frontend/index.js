@@ -95,6 +95,7 @@ function submitSignupForm() {
                     displayUser(userObject)
                     hideForm(signupForm);
                     displaySortButtons()
+                    document.getElementsByClassName("logout")[0].classList.remove("hidden")
                 })
 
         })
@@ -131,6 +132,7 @@ function submitLoginForm() {
             displayUser(userObject, "back")
             hideForm(loginForm);
             displaySortButtons()
+            document.getElementsByClassName("logout")[0].classList.remove("hidden")
 
         })
         .catch(function(error) {
