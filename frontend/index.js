@@ -314,183 +314,43 @@ function submitTrolleyForm() {
 
 }
 
-//eventually use this to refactor code!!
-function alternativemakeCard(trolley) {
-    let card = document.createElement("div")
-    card.innerHTML =
-        `<div class = "card green">`
-    return card
-}
-
-//This section is just for making the cards
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function makeCard(trolley) {
-    //top level
     let card = document.createElement("div")
-    card.classList.add("card")
-    card.id = trolley.id
-    if (toggle % 2 == 0)
-        card.classList.add("green")
-
-
-    //2nd level
-
-    let additional = document.createElement("div")
-    additional.classList.add("additional")
-
-    //3rd level
-
-    let usercard = document.createElement("div")
-    usercard.classList.add("user-card")
-
-    let moreinfo = document.createElement("div")
-    moreinfo.classList.add("more-info")
-
-    let general = document.createElement("div")
-    general.classList.add("general")
-
-    //4th level part 1
-
-
-    let distance = document.createElement("div")
-    distance.classList.add("level")
-    distance.classList.add("center")
-    distance.innerText = `${Math.round(trolley.distance * 10) / 10} kms`
-
-    let image = document.createElement("img")
-    if (toggle % 2 == 0) {
-        image.id = "green"
-    }
-    image.src = findImage(trolley)
-    image.classList.add("card-image")
-
-    let datetime = document.createElement("div")
-    datetime.classList.add("points")
-    datetime.classList.add("center")
-    datetime.innerText = formatDate(trolley)
-
-    let d_button = document.createElement("img")
-    d_button.src = "images/delete.png"
-    d_button.classList.add("delete")
-    d_button.addEventListener("click", e => {
-        alert("You've deleted your trolley");
-        deleteTrolley(trolley)
-    })
-
-
-    let generalh1 = document.createElement("h1")
-    generalh1.innerText = trolley.username
-
-    let generalp = document.createElement("p")
-    generalp.innerText = `"${trolley.username} has a delivery slot booked for 
-    ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"`
-
-
-    //4th level part 2
-
-    let h1 = document.createElement("h1")
-    h1.innerText = trolley.username
-
-    let coords = document.createElement("div")
-    coords.classList.add("coords")
-
-    let coords2 = document.createElement("div")
-    coords2.classList.add("coords")
-
-    let stats = document.createElement("div")
-    stats.classList.add("stats")
-
-    //5th level
-
-    let shopbrand = document.createElement("span")
-    shopbrand.innerText = "Supermarket"
-
-    let supermarket = document.createElement("span")
-    supermarket.innerText = trolley.supermarket
-
-    let postcodemarker = document.createElement("span")
-    postcodemarker.innerText = "Postcode"
-
-    let d = document.createElement("span")
-    d.innerText = trolley.postcode
-
-    //stats at bottom of card
-
-    let stat1 = document.createElement("div")
-
-    let title = document.createElement("div")
-    title.classList.add("title")
-    title.innerText = "Item spaces"
-
-    let i = document.createElement("div")
-    i.classList.add("value")
-    i.innerText = trolley.space
-
-    let stat2 = document.createElement("div")
-
-    let title2 = document.createElement("div")
-    title2.classList.add("title")
-    title2.innerText = "Contact"
-
-    let i2 = document.createElement("a")
-    i2.classList.add("value")
-    i2.innerText = "@"
-    i2.href = `mailto:${trolley.email}?subject=Email from OffMyTrolley&body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
-    please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks!`
-    i2.addEventListener("click", function(e) {
-        domDeleteTrolley(trolley)
-    })
-
-    //append stats
-    stat1.appendChild(title)
-    stat1.appendChild(i)
-    stat2.appendChild(title2)
-    stat2.appendChild(i2)
-
-    //append level 5
-    coords.appendChild(shopbrand)
-    coords.appendChild(supermarket)
-    coords2.appendChild(postcodemarker)
-    coords2.appendChild(d)
-    stats.appendChild(stat1)
-    stats.appendChild(stat2)
-
-    //append level 4 part 2
-
-    moreinfo.appendChild(h1)
-    moreinfo.appendChild(coords)
-    moreinfo.appendChild(coords2)
-    moreinfo.appendChild(stats)
-
-    //append level 4 part 1
-
-    general.appendChild(generalh1)
-    general.appendChild(generalp)
-
-    usercard.appendChild(distance)
-    usercard.appendChild(image)
-    usercard.appendChild(datetime)
-    if (trolley.user_id == userObject.id) {
-        usercard.appendChild(d_button)
-    }
-
-
-    //append level 3
-    additional.appendChild(usercard)
-    additional.appendChild(moreinfo)
-
-    //append level 2
-    card.appendChild(additional)
-    card.appendChild(general)
-
-    //append top level
-
-    toggle += 1
-
+    card.innerHTML = `
+    <div class="card" id="${trolley.id}">
+      <div class="additional">
+      <div class="user-card">
+        <div class="level center">${Math.round(trolley.distance * 10) / 10} kms</div>
+          <img src="images/${trolley.supermarket}.jpg" class="card-image">
+            <div class="points center">${trolley.date}</div>
+            <img src="images/delete.png" class="delete"></div>
+            <div class="more-info">
+              <h1>${trolley.username}</h1>
+              <div class="coords">
+              <span>Supermarket</span>
+              <span>${trolley.supermarket}</span>
+              </div>
+        <div class="coords">
+          <span>Postcode</span>
+          <span>${trolley.postcode}</span>
+          </div>
+        <div class="stats"><div>
+        <div class="title">Item spaces</div>
+        <div class="value">${trolley.space}</div>
+        </div>
+  <div>
+    <div class="title">Contact</div>
+      <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
+      please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.name}">@</a></div>
+      </div>
+    </div>
+</div>
+<div class="general"><h1>${trolley.username}</h1>
+  <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
+  </div>
+</div>`
     return card
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function domDeleteTrolley(trolley) {
     document.getElementById(trolley.id).remove()
