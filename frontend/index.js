@@ -335,7 +335,7 @@ function makeCard(trolley) {
         </div>
         <div class="more-info">
           <h1>${trolley.username}</h1>
-          <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
+          <p>"${trolley.username} has a delivery slot on ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
           <div class="coords">
               
           </div>
@@ -354,10 +354,14 @@ function makeCard(trolley) {
     </div>
   <div class="general">
     <h1>${trolley.username}</h1>
-    <span>Supermarket</span>
-    <span>${trolley.supermarket}</span><br>
-    <span>Postcode</span>
+    <span>Supermarket - </span>
+    <span>${trolley.supermarket}</span><br><br>
+    <span>Postcode - </span>
     <span>${trolley.postcode}</span>
+    <div class="stats">
+    <div class="title">Item spaces</div>
+    <div class="value">9</div>
+    </div>
     
   </div>
 </div>`

@@ -141,13 +141,14 @@ body {
     display: block;
 }
 
-.card .additional .stats div.title {
+.title {
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
+    padding-top: 45px;
 }
 
-.card .additional .stats div.value {
+.value {
     font-size: 1.5rem;
     font-weight: bold;
     line-height: 1.5rem;
