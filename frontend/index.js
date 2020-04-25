@@ -315,9 +315,18 @@ function submitTrolleyForm() {
 }
 
 function makeCard(trolley) {
+    function toggleColour() {
+        if (toggle % 2 == 0)
+            return "card green"
+        else
+            return "card"
+    }
+
+
     let card = document.createElement("div")
     card.innerHTML = `
-    <div class="card" id="${trolley.id}">
+    <div class="${toggleColour()}"
+      id = "${trolley.id}" >
       <div class="additional">
         <div class="user-card">
           <div class="level center">${Math.round(trolley.distance * 10) / 10} kms</div>
@@ -351,6 +360,8 @@ function makeCard(trolley) {
     <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
   </div>
 </div>`
+
+    toggle += 1
     return card
 }
 
