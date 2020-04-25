@@ -335,18 +335,16 @@ function makeCard(trolley) {
         </div>
         <div class="more-info">
           <h1>${trolley.username}</h1>
+          <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
           <div class="coords">
-              <span>Supermarket</span>
-              <span>${trolley.supermarket}</span>
+              
           </div>
         <div class="coords">
-          <span>Postcode</span>
-          <span>${trolley.postcode}</span>
+         
         </div>
-        <div class="stats"><div>
-          <div class="title">Item spaces</div>
-          <div class="value">${trolley.space}</div>
-        </div>
+        <div class="stats">
+          
+        
         <div>
           <div class="title">Contact</div>
           <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
@@ -356,7 +354,11 @@ function makeCard(trolley) {
     </div>
   <div class="general">
     <h1>${trolley.username}</h1>
-    <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
+    <span>Supermarket</span>
+    <span>${trolley.supermarket}</span><br>
+    <span>Postcode</span>
+    <span>${trolley.postcode}</span>
+    
   </div>
 </div>`
 
