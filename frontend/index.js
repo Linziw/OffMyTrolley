@@ -332,7 +332,6 @@ function makeCard(trolley) {
           <div class="level center">${Math.round(trolley.distance * 10) / 10} kms</div>
           <img src="images/${trolley.supermarket}.jpg" class="card-image" id=${toggleColour()}>
           <div class="points center">${trolley.date}</div>
-          <img src="images/delete.png" class="delete">
         </div>
         <div class="more-info">
           <h1>${trolley.username}</h1>
@@ -360,6 +359,18 @@ function makeCard(trolley) {
     <p>"${trolley.username} has a delivery slot booked for ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
   </div>
 </div>`
+
+    let d_button = document.createElement("img")
+    d_button.src = "images/delete.png"
+    d_button.classList.add("delete")
+    d_button.addEventListener("click", e => {
+        alert("You've deleted your trolley");
+        deleteTrolley(trolley)
+    })
+
+    if (trolley.user_id == userObject.id) {
+        card.getElementsByClassName("user-card")[0].appendChild(d_button)
+    }
 
     toggle += 1
     return card
