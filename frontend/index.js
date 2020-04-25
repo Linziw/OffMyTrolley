@@ -317,20 +317,20 @@ function submitTrolleyForm() {
 function makeCard(trolley) {
     function toggleColour() {
         if (toggle % 2 == 0)
-            return "card green"
+            return "green"
         else
-            return "card"
+            return ""
     }
 
 
     let card = document.createElement("div")
     card.innerHTML = `
-    <div class="${toggleColour()}"
+    <div class="card ${toggleColour()}"
       id = "${trolley.id}" >
       <div class="additional">
         <div class="user-card">
           <div class="level center">${Math.round(trolley.distance * 10) / 10} kms</div>
-          <img src="images/${trolley.supermarket}.jpg" class="card-image">
+          <img src="images/${trolley.supermarket}.jpg" id=${toggleColour()} class="card-image">
           <div class="points center">${trolley.date}</div>
           <img src="images/delete.png" class="delete">
         </div>
