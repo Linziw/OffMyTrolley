@@ -356,7 +356,7 @@ function makeCard(trolley) {
     <span>${trolley.postcode}</span>
     <div class="stats">
     <div class="title">Item spaces</div>
-    <div class="value">9</div>
+    <div class="value">${trolley.space}</div>
     </div>
     
   </div>
