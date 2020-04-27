@@ -4,13 +4,9 @@ class TrolleysController < ApplicationController
     render json: TrolleySerializer.new(trolleys).to_serialized_json
   end
 
-  def show
-    trolley = Trolley.find_by(id: params[:id])
-    render json: TrolleySerializer.new(trolley).to_serialized_json
-  end
-
   def create
-    newtrolley = Trolley.create(user_id: params[:user_id], date: params[:date], time: params[:time], supermarket: params[:supermarket], space: params[:space])
+    newtrolley = Trolley.create(post_params)
+    
     if newtrolley.persisted?
       render json: TrolleySerializer.new(newtrolley).to_serialized_json
     else
@@ -23,4 +19,9 @@ class TrolleysController < ApplicationController
     trolley.destroy
     render json:{message: 'the trolley has been destroyed!'}
   end
+
+  private 
+def post_params
+  params.require(:trolley).permit(:date, :time, :supermarket, :space, :user_id)
+end
 end
