@@ -1,7 +1,3 @@
-let allTrolleys = [] // A place to keep all of the Trolley objects once created.
-let toggle = 0 // The counter for toggling the card colours
-let userObject // Where the object for the current user is stored
-
 // initial page load
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents(); //make login button clickable
@@ -78,7 +74,6 @@ function plusButtonEvents() {
 
         })
 
-
         let new_trolley_submit = document.getElementById("new_trolley_submit");
         new_trolley_submit.addEventListener("click", (event) => {
             event.preventDefault();
@@ -102,29 +97,8 @@ function logoutEvents() {
             .catch(function(error) {
                 alert("We cannot log you out, you are doomed to stay, sorry");
             })
-
     })
 }
-
-
-
-//helper methods for sorting selection - very similar? Could be combined??////////////////////////////////////////////
-function allsortedbydistance() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.distance;
-        var thingB = b.distance;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
-
-function allsortedbydate() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.date;
-        var thingB = b.date;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function submitLoginForm() {
     let loginForm = document.getElementById("login-form");
@@ -199,17 +173,12 @@ function submitSignupForm() {
             alert("Bad Postcode!");
             console.log(error.message)
         })
-
-
 }
-
-
 
 function displayTrolleys(sortOption = allsortedbydistance()) {
     console.log(allTrolleys)
     let trolleydisplay = document.createElement("trolley-display")
     trolleydisplay.classList.add("center")
-        //let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     sortOption.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     showForm(document.getElementsByClassName("add-trolley")[0])
     document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
@@ -220,7 +189,6 @@ function createTrolleys(trolleys) {
         allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
             trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude)))
     });
-
 }
 
 function sendMail(trolley) {
@@ -229,32 +197,6 @@ function sendMail(trolley) {
         '&body=' + document.getElementById('email_address').value;
     window.location.href = link;
 }
-
-//trolley object looks like this
-//{id: 2, date: "2020-08-21", time: "2000-01-01T12:00:00.000Z", supermarket: "Iceland", space: 10, …}
-
-function findImage(trolley) {
-    return `images/${trolley.supermarket}.jpg`
-}
-
-function formatDate(trolley) {
-    let split = trolley.date.split("-")
-    return split.reverse().join("-")
-}
-
-function formatTime(trolley) {
-    split = trolley.time.split("")
-    return split.slice(11, 16).join("")
-}
-
-function displayUser(userObject, greeting = "") {
-    let welcome = document.createElement("h2")
-    welcome.innerText = `Welcome ${greeting} ${userObject.username}, choose a trolley delivery, or add one of your own `
-    let heading = document.getElementById("heading")
-    heading.append(welcome)
-}
-
-
 
 function submitTrolleyForm() {
     let new_trolley_form = document.getElementById("new_trolley_form")
@@ -362,10 +304,6 @@ function makeCard(trolley) {
     return card
 }
 
-function domDeleteTrolley(trolley) {
-    document.getElementById(trolley.id).remove()
-}
-
 
 function deleteTrolley(trolley) {
     let card = document.getElementById(trolley.id)
@@ -390,6 +328,7 @@ function deleteTrolley(trolley) {
         })
 }
 
+//maybe change so they are there from start but just hidden?
 function displaySortButtons() {
     let header = document.getElementsByTagName("header")[0]
     let sortButtons = document.createElement("div")
@@ -418,13 +357,3 @@ function displaySortButtons() {
     sortButtons.appendChild(distanceButton)
     header.appendChild(sortButtons)
 }
-
-//////////////helpers for hiding/showing elements, could these be combined into one that toggles?//
-function hideForm(form) {
-    form.classList.add("hidden")
-}
-
-function showForm(form) {
-    form.classList.remove("hidden")
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////
