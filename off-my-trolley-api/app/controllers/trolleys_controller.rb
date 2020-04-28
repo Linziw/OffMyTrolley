@@ -6,11 +6,8 @@ class TrolleysController < ApplicationController
 
   def create
     newtrolley = Trolley.create(post_params)
-    
     if newtrolley.persisted?
       render json: TrolleySerializer.new(newtrolley).to_serialized_json
-    else
-      render json:{message: 'the trolley didnt save!'}
     end
   end
 

@@ -300,17 +300,23 @@ function submitTrolleyForm() {
             return response.json();
         })
         .then(function(trolley) {
+            console.log(trolley)
 
             newtrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
                 trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude))
             allTrolleys.push(newtrolley)
             console.log(allTrolleys)
             trolleydisplay.appendChild(makeCard(newtrolley))
+            hideForm(new_trolley_form);
+            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+            showForm(trolleydisplay)
+            showForm(document.getElementsByClassName("add-trolley")[0])
+
         })
-    hideForm(new_trolley_form);
-    document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
-    showForm(trolleydisplay)
-    showForm(document.getElementsByClassName("add-trolley")[0])
+        .catch(function(error) {
+            alert("Please try to add a trolley again, this time make sure you fill in every field!");
+            new_trolley_form.reset()
+        })
 
 }
 
