@@ -336,24 +336,31 @@ function displaySortButtons() {
 
     let distanceButton = document.createElement("button")
     let dateButton = document.createElement("button")
+    let supermarketButton = document.createElement("button")
     distanceButton.innerHTML = "Sort by Distance"
     dateButton.innerHTML = "Sort by Date"
-
+    supermarketButton.innerHTML = "Sort by Supermarket"
+        //lots of repetition here!
     distanceButton.addEventListener("click", function(e) {
         oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-        console.log(oldTrolleys)
         oldTrolleys.parentNode.removeChild(oldTrolleys);
         displayTrolleys(allsortedbydistance())
     })
 
     dateButton.addEventListener("click", function(e) {
         oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-        console.log(oldTrolleys)
         oldTrolleys.parentNode.removeChild(oldTrolleys);
         displayTrolleys(allsortedbydate())
     })
 
+    supermarketButton.addEventListener("click", function(e) {
+        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
+        oldTrolleys.parentNode.removeChild(oldTrolleys);
+        displayTrolleys(allsortedbysupermarket())
+    })
+
     sortButtons.appendChild(dateButton)
     sortButtons.appendChild(distanceButton)
+    sortButtons.appendChild(supermarketButton)
     header.appendChild(sortButtons)
 }

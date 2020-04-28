@@ -57,4 +57,12 @@ function allsortedbydate() {
         return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
     })
 }
+
+function allsortedbysupermarket() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.supermarket;
+        var thingB = b.supermarket;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
