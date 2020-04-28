@@ -6,34 +6,17 @@ let userObject // Where the object for the current user is stored
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents(); //make login button clickable
     signupEvents(); //make signup button clickable
-    logoutEvents(); // make logout button clickable (hidden at first)
     getTrolleys(); //fetch the trolleys from RAILS in the backgroud
     plusButtonEvents(); //make a plus button to add new trolleys (hidden at first)
-
+    logoutEvents(); // make logout button clickable (hidden at first)
 })
-
-function allsortedbydistance() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.distance;
-        var thingB = b.distance;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
-
-function allsortedbydate() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.date;
-        var thingB = b.date;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
 
 function loginEvents() {
     let login_button = document.getElementById("login-button");
     let login_form = document.getElementById("login-form");
     let signup_button = document.getElementById("signup-button");
 
-    login_button.addEventListener("click", function(e) {
+    login_button.addEventListener("click", function() {
         login_button.classList.add("hidden");
         signup_button.classList.add("hidden");
         login_form.classList.remove("hidden");
@@ -44,6 +27,64 @@ function loginEvents() {
             submitLoginForm()
         })
     });
+}
+
+function signupEvents() {
+    let signup_button = document.getElementById("signup-button");
+    let signup_form = document.getElementById("signup-form");
+    let login_button = document.getElementById("login-button");
+
+    signup_button.addEventListener("click", function(e) {
+        login_button.classList.add("hidden")
+        signup_button.classList.add("hidden")
+        signup_form.classList.remove("hidden")
+
+        let signup_submit = document.getElementById("signup-submit");
+        signup_submit.addEventListener("click", (event) => {
+            event.preventDefault();
+            submitSignupForm();
+        })
+    });
+}
+
+function getTrolleys() {
+    fetch('http://localhost:3000/trolleys')
+        .then(response =>
+            response.json())
+        .then(object => createTrolleys(object))
+
+}
+
+function plusButtonEvents() {
+    let plusButton = document.getElementsByClassName("add-trolley")[0];
+    plusButton.addEventListener("click", function(e) {
+        hideForm(plusButton);
+        hideForm(document.getElementsByClassName("sortButton")[0])
+
+        new_trolley_form.classList.remove("hidden")
+
+        hideForm(document.getElementsByTagName("trolley-display")[0])
+
+        h2 = document.getElementsByTagName("h2")[0]
+        hideForm(h2)
+
+        let cancel = document.getElementById("cancel");
+        cancel.addEventListener("click", (event) => {
+            event.preventDefault();
+            hideForm(new_trolley_form);
+            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+            showForm((document.getElementsByTagName("trolley-display")[0]))
+            showForm(document.getElementsByClassName("add-trolley")[0])
+
+        })
+
+
+        let new_trolley_submit = document.getElementById("new_trolley_submit");
+        new_trolley_submit.addEventListener("click", (event) => {
+            event.preventDefault();
+            submitTrolleyForm();
+        })
+    })
 }
 
 function logoutEvents() {
@@ -65,22 +106,56 @@ function logoutEvents() {
     })
 }
 
-function signupEvents() {
-    let signup_button = document.getElementById("signup-button");
-    let signup_form = document.getElementById("signup-form");
-    let login_button = document.getElementById("login-button");
 
-    signup_button.addEventListener("click", function(e) {
-        login_button.classList.add("hidden")
-        signup_button.classList.add("hidden")
-        signup_form.classList.remove("hidden")
 
-        let signup_submit = document.getElementById("signup-submit");
-        signup_submit.addEventListener("click", (event) => {
-            event.preventDefault();
-            submitSignupForm();
+//helper methods for sorting selection - very similar? Could be combined??////////////////////////////////////////////
+function allsortedbydistance() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.distance;
+        var thingB = b.distance;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
+
+function allsortedbydate() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.date;
+        var thingB = b.date;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function submitLoginForm() {
+    let loginForm = document.getElementById("login-form");
+    let formUsername = document.getElementById('li-username').value
+    let formPassword = document.getElementById('li-password').value
+
+    let data = { username: formUsername, password: formPassword }
+    let configObj = {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch("http://localhost:3000/login", configObj)
+        .then(response => response.json())
+        .then(result => {
+            userObject = result
+            console.log(userObject)
+            displayTrolleys();
+            displayUser(userObject, "back")
+            hideForm(loginForm);
+            displaySortButtons()
+            document.getElementsByClassName("logout")[0].classList.remove("hidden")
+
         })
-    });
+        .catch(function(error) {
+            alert("We cannot verify you, please try again");
+        })
 }
 
 function submitSignupForm() {
@@ -129,57 +204,6 @@ function submitSignupForm() {
 }
 
 
-function submitLoginForm() {
-    let loginForm = document.getElementById("login-form");
-    let formUsername = document.getElementById('li-username').value
-    let formPassword = document.getElementById('li-password').value
-
-    let data = { username: formUsername, password: formPassword }
-    let configObj = {
-        method: 'post',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(data)
-    };
-
-    fetch("http://localhost:3000/login", configObj)
-        .then(response => response.json())
-        .then(result => {
-            userObject = result
-            console.log(userObject)
-            displayTrolleys();
-            displayUser(userObject, "back")
-            hideForm(loginForm);
-            displaySortButtons()
-            document.getElementsByClassName("logout")[0].classList.remove("hidden")
-
-        })
-        .catch(function(error) {
-            alert("We cannot verify you, please try again");
-        })
-}
-
-
-
-
-
-function getTrolleys() {
-    fetch('http://localhost:3000/trolleys')
-        .then(response =>
-            response.json())
-        .then(object => createTrolleys(object))
-
-}
-
-function hideForm(form) {
-    form.classList.add("hidden")
-}
-
-function showForm(form) {
-    form.classList.remove("hidden")
-}
 
 function displayTrolleys(sortOption = allsortedbydistance()) {
     console.log(allTrolleys)
@@ -197,42 +221,6 @@ function createTrolleys(trolleys) {
             trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude)))
     });
 
-}
-
-
-class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, latitude, longitude) {
-        this.id = id
-        this.date = date;
-        this.time = time;
-        this.supermarket = supermarket;
-        this.space = space;
-        this.username = username;
-        this.email = email;
-        this.postcode = postcode;
-        this.user_id = user_id;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    get distance() {
-        let R = 6371; // Radius of the earth in km
-        let dLat = deg2rad(parseFloat(userObject.latitude) - this.latitude); // deg2rad below
-        let dLon = deg2rad(parseFloat(userObject.longitude) - this.longitude);
-        let a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(deg2rad(parseFloat(userObject.latitude))) * Math.cos(deg2rad(this.latitude)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        let d = R * c; // Distance in km
-
-        return d;
-    }
-
-}
-
-function deg2rad(deg) {
-    return deg * (Math.PI / 180)
 }
 
 function sendMail(trolley) {
@@ -266,37 +254,7 @@ function displayUser(userObject, greeting = "") {
     heading.append(welcome)
 }
 
-function plusButtonEvents() {
-    let plusButton = document.getElementsByClassName("add-trolley")[0];
-    plusButton.addEventListener("click", function(e) {
-        hideForm(plusButton);
-        hideForm(document.getElementsByClassName("sortButton")[0])
 
-        new_trolley_form.classList.remove("hidden")
-
-        hideForm(document.getElementsByTagName("trolley-display")[0])
-
-        h2 = document.getElementsByTagName("h2")[0]
-        hideForm(h2)
-
-        let cancel = document.getElementById("cancel");
-        cancel.addEventListener("click", (event) => {
-            event.preventDefault();
-            hideForm(new_trolley_form);
-            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
-            showForm((document.getElementsByTagName("trolley-display")[0]))
-            showForm(document.getElementsByClassName("add-trolley")[0])
-
-        })
-
-
-        let new_trolley_submit = document.getElementById("new_trolley_submit");
-        new_trolley_submit.addEventListener("click", (event) => {
-            event.preventDefault();
-            submitTrolleyForm();
-        })
-    })
-}
 
 function submitTrolleyForm() {
     let new_trolley_form = document.getElementById("new_trolley_form")
@@ -341,6 +299,7 @@ function submitTrolleyForm() {
 
 }
 
+//main method for creating display of cards - anyway to move html into some sort of template?//
 function makeCard(trolley) {
     function toggleColour() {
         if (toggle % 2 == 0)
@@ -348,7 +307,6 @@ function makeCard(trolley) {
         else
             return ""
     }
-
 
     let card = document.createElement("div")
     card.innerHTML = `
@@ -382,10 +340,9 @@ function makeCard(trolley) {
     <span>Postcode - </span>
     <span>${trolley.postcode}</span>
     <div class="stats">
-    <div class="title">Item spaces</div>
-    <div class="value">${trolley.space}</div>
+      <div class="title">Item spaces</div>
+      <div class="value">${trolley.space}</div>
     </div>
-    
   </div>
 </div>`
 
@@ -461,3 +418,13 @@ function displaySortButtons() {
     sortButtons.appendChild(distanceButton)
     header.appendChild(sortButtons)
 }
+
+//////////////helpers for hiding/showing elements, could these be combined into one that toggles?//
+function hideForm(form) {
+    form.classList.add("hidden")
+}
+
+function showForm(form) {
+    form.classList.remove("hidden")
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
