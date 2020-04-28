@@ -1,7 +1,8 @@
 class TrolleysController < ApplicationController
   def index
     trolleys = Trolley.all
-    render json: TrolleySerializer.new(trolleys).to_serialized_json
+    futuretrolleys = trolleys.to_ary.select {|trolley| trolley.date > Date.today}
+    render json: TrolleySerializer.new(futuretrolleys).to_serialized_json
   end
 
   def create
