@@ -6,8 +6,10 @@ let userObject // Where the object for the current user is stored
 window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents(); //make login button clickable
     signupEvents(); //make signup button clickable
+    logoutEvents(); // make logout button clickable (hidden at first)
     getTrolleys(); //fetch the trolleys from RAILS in the backgroud
     plusButtonEvents(); //make a plus button to add new trolleys (hidden at first)
+
 })
 
 function allsortedbydistance() {
@@ -42,6 +44,25 @@ function loginEvents() {
             submitLoginForm()
         })
     });
+}
+
+function logoutEvents() {
+    let logout_button = document.getElementsByClassName("logout")[0]
+    logout_button.addEventListener("click", function(e) {
+        event.preventDefault();
+
+        fetch("http://localhost:3000/logout")
+            .then(response => response.json())
+            .then(result => {
+                userObject = {};
+                location.reload()
+                alert(result.message)
+            })
+            .catch(function(error) {
+                alert("We cannot log you out, you are doomed to stay, sorry");
+            })
+
+    })
 }
 
 function signupEvents() {
