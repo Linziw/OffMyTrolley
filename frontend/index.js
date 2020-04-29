@@ -391,7 +391,7 @@ function editTrolley(trolley) {
     cancel.addEventListener("click", (event) => {
         event.preventDefault();
         hideForm(new_trolley_form);
-        document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+        showForm(document.getElementsByClassName("sortButton")[0])
         showForm((document.getElementsByTagName("trolley-display")[0]))
         showForm(document.getElementsByClassName("add-trolley")[0])
         hideForm(h3)
@@ -402,8 +402,13 @@ function editTrolley(trolley) {
     edit_trolley_submit.removeEventListener("click", event);
     edit_trolley_submit.addEventListener("click", event => {
         event.preventDefault();
-        alert("you are trying to edit")
-            // submitEditTrolleyForm();
+        submitEditTrolleyForm();
+        hideForm(h3);
+        hideForm(new_trolley_form)
+        showForm(document.getElementsByClassName("add-trolley")[0]);
+        showForm(document.getElementsByClassName("sortButton")[0])
+        showForm(document.getElementsByTagName("trolley-display")[0])
+        showForm(document.getElementsByTagName("h2")[0])
     })
 }
 
