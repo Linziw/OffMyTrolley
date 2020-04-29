@@ -66,16 +66,21 @@ function plusButtonEvents() {
 
         let cancel = document.getElementById("cancel");
         cancel.addEventListener("click", (event) => {
-            event.preventDefault();
-            hideForm(new_trolley_form);
-            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
-            showForm((document.getElementsByTagName("trolley-display")[0]))
-            showForm(document.getElementsByClassName("add-trolley")[0])
+                event.preventDefault();
+                hideForm(new_trolley_form);
+                document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+                showForm((document.getElementsByTagName("trolley-display")[0]))
+                showForm(document.getElementsByClassName("add-trolley")[0])
 
-        })
-
+            })
+            //wipe off any old event listeners
         let new_trolley_submit = document.getElementById("new_trolley_submit");
-        new_trolley_submit.addEventListener("click", (event) => {
+        let old_element = new_trolley_submit;
+        let new_element = old_element.cloneNode(true);
+        old_element.parentNode.replaceChild(new_element, old_element);
+
+
+        new_element.addEventListener("click", (event) => {
             event.preventDefault();
             submitTrolleyForm();
         })
@@ -398,20 +403,28 @@ function editTrolley(trolley) {
 
     })
 
-    let edit_trolley_submit = document.getElementById("new_trolley_submit");
-    edit_trolley_submit.removeEventListener("click", event);
-    edit_trolley_submit.addEventListener("click", event => {
+    let new_trolley_submit = document.getElementById("new_trolley_submit");
+    let old_element = new_trolley_submit;
+    let new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element);
+    new_element.addEventListener("click", event => {
         event.preventDefault();
         submitEditTrolleyForm();
-        hideForm(h3);
-        hideForm(new_trolley_form)
-        showForm(document.getElementsByClassName("add-trolley")[0]);
-        showForm(document.getElementsByClassName("sortButton")[0])
-        showForm(document.getElementsByTagName("trolley-display")[0])
-        showForm(document.getElementsByTagName("h2")[0])
+
     })
+
 }
 
 function submitEditTrolleyForm() {
+    let edit_trolley_submit = document.getElementById("new_trolley_submit")
     alert("you are trying to edit")
+    hideForm(document.getElementsByTagName("h3")[0]);
+    hideForm(new_trolley_form)
+    showForm(document.getElementsByClassName("add-trolley")[0]);
+    showForm(document.getElementsByClassName("sortButton")[0])
+    showForm(document.getElementsByTagName("trolley-display")[0])
+    showForm(document.getElementsByTagName("h2")[0])
+    let old_element = edit_trolley_submit;
+    let new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element);
 }
