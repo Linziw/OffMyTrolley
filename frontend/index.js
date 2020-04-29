@@ -386,8 +386,17 @@ function editTrolley(trolley) {
     hideForm(document.getElementsByClassName("sortButton")[0])
     hideForm(document.getElementsByTagName("trolley-display")[0])
     hideForm(document.getElementsByTagName("h2")[0])
-
     showForm(document.getElementById("new_trolley_form"))
+
+    let cancel = document.getElementById("cancel");
+    cancel.addEventListener("click", (event) => {
+        event.preventDefault();
+        hideForm(new_trolley_form);
+        document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+        showForm((document.getElementsByTagName("trolley-display")[0]))
+        showForm(document.getElementsByClassName("add-trolley")[0])
+
+    })
 
 
 }
