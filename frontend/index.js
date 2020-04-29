@@ -300,8 +300,7 @@ function makeCard(trolley) {
     e_button.src = "images/edit.png"
     e_button.classList.add("edit")
     e_button.addEventListener("click", e => {
-        alert("You want to edit your trolley");
-        //add edit method here
+        editTrolley(trolley)
     })
 
     if (trolley.user_id == userObject.id) {
@@ -375,4 +374,20 @@ function displaySortButtons() {
     sortButtons.appendChild(distanceButton)
     sortButtons.appendChild(supermarketButton)
     header.appendChild(sortButtons)
+}
+
+//almost exactly the same as plusButtonEvents method
+function editTrolley(trolley) {
+    h3 = document.createElement("h3")
+    h3.innerText = "Edit your trolley"
+    document.getElementById("heading").appendChild(h3)
+
+    hideForm(document.getElementsByClassName("add-trolley")[0]);
+    hideForm(document.getElementsByClassName("sortButton")[0])
+    hideForm(document.getElementsByTagName("trolley-display")[0])
+    hideForm(document.getElementsByTagName("h2")[0])
+
+    showForm(document.getElementById("new_trolley_form"))
+
+
 }
