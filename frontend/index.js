@@ -378,9 +378,8 @@ function displaySortButtons() {
 
 //almost exactly the same as plusButtonEvents method
 function editTrolley(trolley) {
-    h3 = document.createElement("h3")
-    h3.innerText = "Edit your trolley"
-    document.getElementById("heading").appendChild(h3)
+    h3 = document.getElementsByTagName("h3")[0]
+    showForm(h3)
 
     hideForm(document.getElementsByClassName("add-trolley")[0]);
     hideForm(document.getElementsByClassName("sortButton")[0])
@@ -395,8 +394,19 @@ function editTrolley(trolley) {
         document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
         showForm((document.getElementsByTagName("trolley-display")[0]))
         showForm(document.getElementsByClassName("add-trolley")[0])
+        hideForm(h3)
 
     })
 
+    let edit_trolley_submit = document.getElementById("new_trolley_submit");
+    edit_trolley_submit.removeEventListener("click", event);
+    edit_trolley_submit.addEventListener("click", event => {
+        event.preventDefault();
+        alert("you are trying to edit")
+            // submitEditTrolleyForm();
+    })
+}
 
+function submitEditTrolleyForm() {
+    alert("you are trying to edit")
 }
