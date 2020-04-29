@@ -256,7 +256,7 @@ function makeCard(trolley) {
       id = "${trolley.id}" >
       <div class="additional">
         <div class="user-card">
-          <div class="level center">${Math.round(trolley.distance * 10) / 10} kms</div>
+          <div class="level center">${Math.round(trolley.distance * 10) / 10} km</div>
           <img src="images/${trolley.supermarket}.jpg" class="card-image" id=${toggleColour()}>
           <div class="points center">${formatDate(trolley)}</div>
         </div>
@@ -296,8 +296,20 @@ function makeCard(trolley) {
         deleteTrolley(trolley)
     })
 
+    let e_button = document.createElement("img")
+    e_button.src = "images/edit.png"
+    e_button.classList.add("edit")
+    e_button.addEventListener("click", e => {
+        alert("You want to edit your trolley");
+        //add edit method here
+    })
+
     if (trolley.user_id == userObject.id) {
-        card.getElementsByClassName("user-card")[0].appendChild(d_button)
+        icons = document.createElement("div")
+        icons.classList.add("icons")
+        icons.appendChild(e_button);
+        icons.appendChild(d_button);
+        card.getElementsByClassName("user-card")[0].appendChild(icons)
     }
 
     toggle += 1
