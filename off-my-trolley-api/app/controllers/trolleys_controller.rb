@@ -13,7 +13,11 @@ class TrolleysController < ApplicationController
   end
 
   def update
-    binding.pry
+    trolley= Trolley.find_by_id(params[:id])
+    trolley.update(post_params)
+    if trolley.persisted?
+      render json: TrolleySerializer.new(trolley).to_serialized_json
+    end
   end
 
   def destroy
