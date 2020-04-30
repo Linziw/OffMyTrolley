@@ -409,15 +409,44 @@ function editTrolley(trolley) {
     old_element.parentNode.replaceChild(new_element, old_element);
     new_element.addEventListener("click", event => {
         event.preventDefault();
-        submitEditTrolleyForm();
+        submitEditTrolleyForm(trolley);
 
     })
 
 }
 
-function submitEditTrolleyForm() {
+function submitEditTrolleyForm(trolley) {
     let edit_trolley_submit = document.getElementById("new_trolley_submit")
     alert("you are trying to edit")
+
+    let new_trolley_form = document.getElementById("new_trolley_form")
+    let formDate = document.getElementById('t-date').value
+    let formTime = document.getElementById('t-time').value
+    let formSupermarket = document.getElementById('t-supermarket').value
+    let formSpace = document.getElementById('t-space').value
+    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
+    let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
+
+    let configObj = {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch(`http://localhost:3000/trolleys/${trolley.id}`, configObj)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(trolley) {
+            console.log(trolley)
+        })
+
+
+
+
     hideForm(document.getElementsByTagName("h3")[0]);
     hideForm(new_trolley_form)
     showForm(document.getElementsByClassName("add-trolley")[0]);

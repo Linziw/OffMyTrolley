@@ -12,6 +12,10 @@ class TrolleysController < ApplicationController
     end
   end
 
+  def update
+    binding.pry
+  end
+
   def destroy
     trolley = Trolley.find_by(id: params[:id])
     trolley.destroy
