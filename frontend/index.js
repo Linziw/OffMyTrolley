@@ -441,8 +441,12 @@ function submitEditTrolleyForm(trolley) {
             return response.json();
         })
         .then(function(trolley) {
-            console.log(trolley)
+            oldTrolley = allTrolleys.find(Trolley => Trolley.id == trolley.id);
+            newTrolley = Object.assign(oldTrolley, trolley);
+            console.log(newTrolley)
         })
+
+    //need to use returned trolley to update existing one and edit all trolley and dom.6
 
 
 
@@ -451,7 +455,9 @@ function submitEditTrolleyForm(trolley) {
     hideForm(new_trolley_form)
     showForm(document.getElementsByClassName("add-trolley")[0]);
     showForm(document.getElementsByClassName("sortButton")[0])
-    showForm(document.getElementsByTagName("trolley-display")[0])
+    oldTrolleys = document.getElementsByTagName("trolley-display")[0];
+    oldTrolleys.parentNode.removeChild(oldTrolleys);
+    displayTrolleys(allsortedbydistance())
     showForm(document.getElementsByTagName("h2")[0])
     let old_element = edit_trolley_submit;
     let new_element = old_element.cloneNode(true);
