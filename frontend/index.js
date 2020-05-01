@@ -445,9 +445,5 @@ function submitEditTrolleyForm(trolley) {
 
     showForm(document.getElementsByTagName("h2")[0])
 
-
-
-    let old_element = edit_trolley_submit;
-    let new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element);
+    clearEventListeners(edit_trolley_submit);
 }
