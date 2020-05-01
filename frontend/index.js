@@ -44,23 +44,12 @@ function plusButtonEvents() {
     let plusButton = document.getElementsByClassName("add-trolley")[0];
 
     plusButton.addEventListener("click", function(e) {
-        hideForm(plusButton);
-        hideForm(document.getElementsByClassName("sortButton")[0])
-
-        new_trolley_form.classList.remove("hidden")
-
-        hideForm(document.getElementsByTagName("trolley-display")[0])
-
-        h2 = document.getElementsByTagName("h2")[0]
-        hideForm(h2)
+        toggleViews();
 
         let cancel = document.getElementById("cancel");
         cancel.addEventListener("click", (event) => {
             event.preventDefault();
-            hideForm(new_trolley_form);
-            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
-            showForm((document.getElementsByTagName("trolley-display")[0]))
-            showForm(document.getElementsByClassName("add-trolley")[0])
+            toggleViews()
         })
 
         clearEventListeners(document.getElementById("new_trolley_submit"));
@@ -71,6 +60,14 @@ function plusButtonEvents() {
             submitTrolleyForm();
         })
     })
+}
+
+function toggleViews() {
+    document.getElementsByClassName("add-trolley")[0].classList.toggle("hidden");
+    document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
+    document.getElementsByTagName("trolley-display")[0].classList.toggle("hidden")
+    document.getElementsByTagName("h2")[0].classList.toggle("hidden")
+    new_trolley_form.classList.toggle("hidden")
 }
 
 function logoutEvents() {
@@ -327,7 +324,6 @@ function deleteTrolley(trolley) {
         })
 }
 
-//maybe change so they are there from start but just hidden?
 function displaySortButtons() {
     showForm(document.getElementsByClassName("sortButton")[0])
     let distanceButton = document.getElementById("distance")
