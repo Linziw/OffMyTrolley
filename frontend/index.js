@@ -417,8 +417,6 @@ function editTrolley(trolley) {
 
 function submitEditTrolleyForm(trolley) {
     let edit_trolley_submit = document.getElementById("new_trolley_submit")
-    alert("you are trying to edit")
-
     let new_trolley_form = document.getElementById("new_trolley_form")
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
@@ -444,21 +442,23 @@ function submitEditTrolleyForm(trolley) {
             oldTrolley = allTrolleys.find(Trolley => Trolley.id == trolley.id);
             newTrolley = Object.assign(oldTrolley, trolley);
             console.log(newTrolley)
+
+            let oldcard = document.getElementById(trolley.id);
+            let newcard = makeCard(newTrolley);
+            oldcard.parentNode.replaceChild(newcard, oldcard)
         })
-
-    //need to use returned trolley to update existing one and edit all trolley and dom.6
-
-
 
 
     hideForm(document.getElementsByTagName("h3")[0]);
     hideForm(new_trolley_form)
     showForm(document.getElementsByClassName("add-trolley")[0]);
     showForm(document.getElementsByClassName("sortButton")[0])
-    oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-    oldTrolleys.parentNode.removeChild(oldTrolleys);
-    displayTrolleys(allsortedbydistance())
+    showForm(document.getElementsByTagName("trolley-display")[0])
+
     showForm(document.getElementsByTagName("h2")[0])
+
+
+
     let old_element = edit_trolley_submit;
     let new_element = old_element.cloneNode(true);
     old_element.parentNode.replaceChild(new_element, old_element);
