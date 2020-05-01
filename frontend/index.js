@@ -8,17 +8,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function loginEvents() {
-    let login_button = document.getElementById("login-button");
-    let login_form = document.getElementById("login-form");
-    let signup_button = document.getElementById("signup-button");
 
-    login_button.addEventListener("click", function() {
+    login_button = document.getElementById("login-button");
+
+    login_button.addEventListener("click", () => {
         login_button.classList.add("hidden");
-        signup_button.classList.add("hidden");
-        login_form.classList.remove("hidden");
-
-        let login_submit = document.getElementById("login-submit");
-        login_submit.addEventListener("click", (event) => {
+        document.getElementById("signup-button").classList.add("hidden");
+        document.getElementById("login-form").classList.remove("hidden");
+        document.getElementById("login-submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitLoginForm()
         })
