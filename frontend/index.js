@@ -115,7 +115,7 @@ function submitLoginForm() {
             displayUser(userObject, "back")
             hideForm(loginForm);
             displaySortButtons()
-            document.getElementsByClassName("logout")[0].classList.remove("hidden")
+            showForm(document.getElementsByClassName("logout")[0])
 
         })
         .catch(function(error) {
@@ -124,7 +124,7 @@ function submitLoginForm() {
 }
 
 function submitSignupForm() {
-    let signupForm = document.getElementById("signup-form")
+    let form = document.getElementById("signup-form")
     let formUsername = document.getElementById('su-username').value
     let formEmail = document.getElementById('su-email').value
     let formPassword = document.getElementById('su-password').value
@@ -149,21 +149,25 @@ function submitSignupForm() {
 
             fetch("http://localhost:3000/users", configObj)
                 .then(response => response.json())
-                .then(result => {
-                    userObject = result
-                    console.log(userObject)
-                    displayTrolleys();
-                    displayUser(userObject)
-                    hideForm(signupForm);
-                    displaySortButtons()
-                    document.getElementsByClassName("logout")[0].classList.remove("hidden")
-                })
+                .then(result =>
+                    login_or_signup_to_main_sequence(result, form)
+                )
 
         })
         .catch(function(error) {
             alert("Bad Postcode!");
             console.log(error.message)
         })
+}
+
+function login_or_signup_to_main_sequence(user, form) {
+    userObject = user;
+    console.log(user);
+    displayTrolleys();
+    displayUser(user);
+    hideForm(form);
+    displaySortButtons();
+    showForm(document.getElementsByClassName("logout")[0])
 }
 
 function displayTrolleys(sortOption = allsortedbydistance()) {
