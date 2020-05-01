@@ -240,7 +240,7 @@ function submitTrolleyForm() {
 
         })
         .catch(function(error) {
-            alert("Please try to add a trolley again, this time make sure you fill in every field!");
+            alert("Please try to add a trolley again, this time make sure you fill in every field, and check that the date is in the future!");
             new_trolley_form.reset()
         })
 
