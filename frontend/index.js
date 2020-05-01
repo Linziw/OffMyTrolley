@@ -10,9 +10,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 function loginEvents() {
     let login_button = document.getElementById("login-button");
     login_button.addEventListener("click", () => {
-        hideForm(login_button);
-        hideForm(document.getElementById("signup-button"));
-        showForm(document.getElementById("login-form"));
+        login_button.classList.toggle("hidden");
+        document.getElementById("signup-button").classList.toggle("hidden");
+        document.getElementById("login-form").classList.toggle("hidden");
         document.getElementById("login-submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitLoginForm()
@@ -23,9 +23,9 @@ function loginEvents() {
 function signupEvents() {
     let signup_button = document.getElementById("signup-button")
     signup_button.addEventListener("click", () => {
-        hideForm(signup_button);
-        hideForm(document.getElementById("login-button"));
-        showForm(document.getElementById("signup-form"));
+        signup_button.classList.toggle("hidden")
+        document.getElementById("login-button").classList.toggle("hidden")
+        document.getElementById("signup-form").classList.toggle("hidden")
         document.getElementById("signup-submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitSignupForm();
@@ -156,7 +156,7 @@ function displayTrolleys(sortOption = allsortedbydistance()) {
     let trolleydisplay = document.createElement("trolley-display")
     trolleydisplay.classList.add("center")
     sortOption.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
-    showForm(document.getElementsByClassName("add-trolley")[0])
+    document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
     document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
 }
 
@@ -290,7 +290,7 @@ function makeCard(trolley) {
 
 function deleteTrolley(trolley) {
     let card = document.getElementById(trolley.id)
-    hideForm(card)
+    card.classList.toggle("hidden")
         //post fetch request to delete from database
     let configObj = {
         method: 'delete',
@@ -335,7 +335,7 @@ function displaySortButtons() {
 //almost exactly the same as plusButtonEvents method
 function editTrolley(trolley) {
     h3 = document.getElementsByTagName("h3")[0];
-    showForm(h3);
+    h3.classList.toggle("hidden")
     toggleViews();
 
     let cancel = document.getElementById("cancel");
@@ -390,13 +390,12 @@ function submitEditTrolleyForm(trolley) {
         })
 
 
-    hideForm(document.getElementsByTagName("h3")[0]);
-    hideForm(new_trolley_form)
-    showForm(document.getElementsByClassName("add-trolley")[0]);
-    showForm(document.getElementsByClassName("sortButton")[0])
-    showForm(document.getElementsByTagName("trolley-display")[0])
-
-    showForm(document.getElementsByTagName("h2")[0])
+    document.getElementsByTagName("h3")[0].classList.toggle("hidden")
+    new_trolley_form.classList.toggle("hidden")
+    document.getElementsByClassName("add-trolley")[0].classList.toggle("hidden")
+    document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
+    document.getElementsByTagName("trolley-display")[0].classList.toggle("hidden")
+    document.getElementsByTagName("h2")[0].classList.toggle("hidden")
 
     clearEventListeners(edit_trolley_submit);
 }

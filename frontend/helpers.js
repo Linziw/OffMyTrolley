@@ -31,16 +31,6 @@ function domDeleteTrolley(trolley) {
     document.getElementById(trolley.id).remove()
 }
 
-//////////////helpers for hiding/showing elements, could these be combined into one that toggles?//
-function hideForm(form) {
-    form.classList.add("hidden")
-}
-
-function showForm(form) {
-    form.classList.remove("hidden")
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 //helper methods for sorting selection - very similar? Could be combined??////////////////////////////////////////////
 function allsortedbydistance() {
     return allTrolleys.sort(function(a, b) {
