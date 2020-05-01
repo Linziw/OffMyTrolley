@@ -92,7 +92,7 @@ function logoutEvents() {
 }
 
 function submitLoginForm() {
-    let loginForm = document.getElementById("login-form");
+    let form = document.getElementById("login-form");
     let formUsername = document.getElementById('li-username').value
     let formPassword = document.getElementById('li-password').value
 
@@ -108,16 +108,7 @@ function submitLoginForm() {
 
     fetch("http://localhost:3000/login", configObj)
         .then(response => response.json())
-        .then(result => {
-            userObject = result
-            console.log(userObject)
-            displayTrolleys();
-            displayUser(userObject, "back")
-            hideForm(loginForm);
-            displaySortButtons()
-            showForm(document.getElementsByClassName("logout")[0])
-
-        })
+        .then(result => login_or_signup_to_main_sequence(result, form))
         .catch(function(error) {
             alert("We cannot verify you, please try again");
         })
@@ -338,17 +329,12 @@ function deleteTrolley(trolley) {
 
 //maybe change so they are there from start but just hidden?
 function displaySortButtons() {
-    let header = document.getElementsByTagName("header")[0]
-    let sortButtons = document.createElement("div")
-    sortButtons.classList.add("sortButton")
+    showForm(document.getElementsByClassName("sortButton")[0])
+    let distanceButton = document.getElementById("distance")
+    let dateButton = document.getElementById("date")
+    let supermarketButton = document.getElementById("supermarket")
 
-    let distanceButton = document.createElement("button")
-    let dateButton = document.createElement("button")
-    let supermarketButton = document.createElement("button")
-    distanceButton.innerHTML = "Sort by Distance"
-    dateButton.innerHTML = "Sort by Date"
-    supermarketButton.innerHTML = "Sort by Supermarket"
-        //lots of repetition here!
+    //lots of repetition here!
     distanceButton.addEventListener("click", function(e) {
         oldTrolleys = document.getElementsByTagName("trolley-display")[0];
         oldTrolleys.parentNode.removeChild(oldTrolleys);
@@ -366,11 +352,6 @@ function displaySortButtons() {
         oldTrolleys.parentNode.removeChild(oldTrolleys);
         displayTrolleys(allsortedbysupermarket())
     })
-
-    sortButtons.appendChild(dateButton)
-    sortButtons.appendChild(distanceButton)
-    sortButtons.appendChild(supermarketButton)
-    header.appendChild(sortButtons)
 }
 
 //almost exactly the same as plusButtonEvents method
