@@ -55,7 +55,7 @@ function allsortedbysupermarket() {
         return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
     })
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 function clearEventListeners(old_element) {
     let new_element = old_element.cloneNode(true);

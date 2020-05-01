@@ -56,14 +56,6 @@ function plusButtonEvents() {
     })
 }
 
-function toggleViews() {
-    document.getElementsByClassName("add-trolley")[0].classList.toggle("hidden");
-    document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
-    document.getElementsByTagName("trolley-display")[0].classList.toggle("hidden")
-    document.getElementsByTagName("h2")[0].classList.toggle("hidden")
-    new_trolley_form.classList.toggle("hidden")
-}
-
 function logoutEvents() {
     document.getElementsByClassName("logout")[0].addEventListener("click", function(e) {
         event.preventDefault();
@@ -72,7 +64,7 @@ function logoutEvents() {
             .then(response => response.json())
             .then(result => {
                 userObject = {};
-                location.reload()
+                location.reload();
                 alert(result.message)
             })
             .catch(function(error) {
@@ -83,10 +75,10 @@ function logoutEvents() {
 
 function submitLoginForm() {
     let form = document.getElementById("login-form");
-    let formUsername = document.getElementById('li-username').value
-    let formPassword = document.getElementById('li-password').value
-
+    let formUsername = document.getElementById('li-username').value;
+    let formPassword = document.getElementById('li-password').value;
     let data = { username: formUsername, password: formPassword }
+
     let configObj = {
         method: 'post',
         headers: {
@@ -105,18 +97,18 @@ function submitLoginForm() {
 }
 
 function submitSignupForm() {
-    let form = document.getElementById("signup-form")
-    let formUsername = document.getElementById('su-username').value
-    let formEmail = document.getElementById('su-email').value
-    let formPassword = document.getElementById('su-password').value
-    let formPostcode = document.getElementById('su-postcode').value
+    let form = document.getElementById("signup-form");
+    let formUsername = document.getElementById('su-username').value;
+    let formEmail = document.getElementById('su-email').value;
+    let formPassword = document.getElementById('su-password').value;
+    let formPostcode = document.getElementById('su-postcode').value;
 
     fetch(`http://api.postcodes.io/postcodes/${formPostcode}`)
         .then(res => res.json())
         .then(data => obj = data)
         .then(() => {
-            userLongitude = obj.result.longitude
-            userLatitude = obj.result.latitude
+            userLongitude = obj.result.longitude;
+            userLatitude = obj.result.latitude;
 
             let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
             let configObj = {
@@ -152,9 +144,9 @@ function loadMainPage(user, form) {
 }
 
 function displayTrolleys(sortOption = allsortedbydistance()) {
-    console.log(allTrolleys)
-    let trolleydisplay = document.createElement("trolley-display")
-    trolleydisplay.classList.add("center")
+    console.log(allTrolleys);
+    let trolleydisplay = document.createElement("trolley-display");
+    trolleydisplay.classList.add("center");
     sortOption.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
     document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
@@ -344,26 +336,19 @@ function editTrolley(trolley) {
         toggleViews()
     })
 
-    let new_trolley_submit = document.getElementById("new_trolley_submit");
-    let old_element = new_trolley_submit;
-    let new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element);
-    new_element.addEventListener("click", event => {
+    clearEventListeners(document.getElementById("new_trolley_submit"));
+    let submitButton = document.getElementById("new_trolley_submit");
+    submitButton.addEventListener("click", event => {
         event.preventDefault();
-        submitEditTrolleyForm(trolley);
-
+        submitEditTrolleyForm(trolley)
     })
-
 }
 
 function submitEditTrolleyForm(trolley) {
-    let edit_trolley_submit = document.getElementById("new_trolley_submit")
-    let new_trolley_form = document.getElementById("new_trolley_form")
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
-    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
     let configObj = {
@@ -382,20 +367,12 @@ function submitEditTrolleyForm(trolley) {
         .then(function(trolley) {
             oldTrolley = allTrolleys.find(Trolley => Trolley.id == trolley.id);
             newTrolley = Object.assign(oldTrolley, trolley);
-            console.log(newTrolley)
-
             let oldcard = document.getElementById(trolley.id);
             let newcard = makeCard(newTrolley);
             oldcard.parentNode.replaceChild(newcard, oldcard)
         })
 
-
-    document.getElementsByTagName("h3")[0].classList.toggle("hidden")
-    new_trolley_form.classList.toggle("hidden")
-    document.getElementsByClassName("add-trolley")[0].classList.toggle("hidden")
-    document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
-    document.getElementsByTagName("trolley-display")[0].classList.toggle("hidden")
-    document.getElementsByTagName("h2")[0].classList.toggle("hidden")
-
-    clearEventListeners(edit_trolley_submit);
+    document.getElementsByTagName("h3")[0].classList.toggle("hidden");
+    toggleViews();
+    clearEventListeners(document.getElementById("new_trolley_submit"))
 }
