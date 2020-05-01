@@ -334,24 +334,17 @@ function displaySortButtons() {
     let dateButton = document.getElementById("date")
     let supermarketButton = document.getElementById("supermarket")
 
-    //lots of repetition here!
-    distanceButton.addEventListener("click", function(e) {
-        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-        oldTrolleys.parentNode.removeChild(oldTrolleys);
-        displayTrolleys(allsortedbydistance())
-    })
+    function sortButtonEventListeners(button, sort) {
+        button.addEventListener("click", function(e) {
+            oldTrolleys = document.getElementsByTagName("trolley-display")[0];
+            oldTrolleys.parentNode.removeChild(oldTrolleys);
+            displayTrolleys(sort())
+        })
+    };
 
-    dateButton.addEventListener("click", function(e) {
-        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-        oldTrolleys.parentNode.removeChild(oldTrolleys);
-        displayTrolleys(allsortedbydate())
-    })
-
-    supermarketButton.addEventListener("click", function(e) {
-        oldTrolleys = document.getElementsByTagName("trolley-display")[0];
-        oldTrolleys.parentNode.removeChild(oldTrolleys);
-        displayTrolleys(allsortedbysupermarket())
-    })
+    sortButtonEventListeners(distanceButton, allsortedbydistance);
+    sortButtonEventListeners(dateButton, allsortedbydate);
+    sortButtonEventListeners(supermarketButton, allsortedbysupermarket);
 }
 
 //almost exactly the same as plusButtonEvents method
