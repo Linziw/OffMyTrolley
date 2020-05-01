@@ -340,6 +340,8 @@ function deleteTrolley(trolley) {
         })
         .then(function(confirmation) {
 
+            oldTrolleyIndex = allTrolleys.findIndex(Trolley => Trolley.id == trolley.id);
+            allTrolleys.splice(oldTrolleyIndex, 1);
             console.log(confirmation)
         })
 }
