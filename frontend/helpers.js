@@ -66,3 +66,8 @@ function allsortedbysupermarket() {
     })
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function clearEventListeners(old_element) {
+    let new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element)
+}

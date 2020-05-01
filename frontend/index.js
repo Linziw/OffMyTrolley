@@ -20,8 +20,6 @@ function loginEvents() {
     });
 }
 
-//these two are nearly identical, can refactor together somehow?
-
 function signupEvents() {
     let signup_button = document.getElementById("signup-button")
     signup_button.addEventListener("click", () => {
@@ -34,17 +32,17 @@ function signupEvents() {
         })
     });
 }
-
+//these two above are nearly identical, can refactor together somehow?
 function getTrolleys() {
     fetch('http://localhost:3000/trolleys')
         .then(response =>
             response.json())
         .then(object => createTrolleys(object))
-
 }
 
 function plusButtonEvents() {
     let plusButton = document.getElementsByClassName("add-trolley")[0];
+
     plusButton.addEventListener("click", function(e) {
         hideForm(plusButton);
         hideForm(document.getElementsByClassName("sortButton")[0])
@@ -58,21 +56,17 @@ function plusButtonEvents() {
 
         let cancel = document.getElementById("cancel");
         cancel.addEventListener("click", (event) => {
-                event.preventDefault();
-                hideForm(new_trolley_form);
-                document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
-                showForm((document.getElementsByTagName("trolley-display")[0]))
-                showForm(document.getElementsByClassName("add-trolley")[0])
+            event.preventDefault();
+            hideForm(new_trolley_form);
+            document.getElementsByClassName("sortButton")[0].classList.remove("hidden")
+            showForm((document.getElementsByTagName("trolley-display")[0]))
+            showForm(document.getElementsByClassName("add-trolley")[0])
+        })
 
-            })
-            //wipe off any old event listeners
-        let new_trolley_submit = document.getElementById("new_trolley_submit");
-        let old_element = new_trolley_submit;
-        let new_element = old_element.cloneNode(true);
-        old_element.parentNode.replaceChild(new_element, old_element);
+        clearEventListeners(document.getElementById("new_trolley_submit"));
 
-
-        new_element.addEventListener("click", (event) => {
+        //add new event listeners back on
+        document.getElementById("new_trolley_submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitTrolleyForm();
         })
