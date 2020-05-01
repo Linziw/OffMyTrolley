@@ -8,13 +8,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function loginEvents() {
-
-    login_button = document.getElementById("login-button");
-
+    let login_button = document.getElementById("login-button");
     login_button.addEventListener("click", () => {
-        login_button.classList.add("hidden");
-        document.getElementById("signup-button").classList.add("hidden");
-        document.getElementById("login-form").classList.remove("hidden");
+        hideForm(login_button);
+        hideForm(document.getElementById("signup-button"));
+        showForm(document.getElementById("login-form"));
         document.getElementById("login-submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitLoginForm()
@@ -22,18 +20,15 @@ function loginEvents() {
     });
 }
 
+//these two are nearly identical, can refactor together somehow?
+
 function signupEvents() {
-    let signup_button = document.getElementById("signup-button");
-    let signup_form = document.getElementById("signup-form");
-    let login_button = document.getElementById("login-button");
-
-    signup_button.addEventListener("click", function(e) {
-        login_button.classList.add("hidden")
-        signup_button.classList.add("hidden")
-        signup_form.classList.remove("hidden")
-
-        let signup_submit = document.getElementById("signup-submit");
-        signup_submit.addEventListener("click", (event) => {
+    let signup_button = document.getElementById("signup-button")
+    signup_button.addEventListener("click", () => {
+        hideForm(signup_button);
+        hideForm(document.getElementById("login-button"));
+        showForm(document.getElementById("signup-form"));
+        document.getElementById("signup-submit").addEventListener("click", (event) => {
             event.preventDefault();
             submitSignupForm();
         })
