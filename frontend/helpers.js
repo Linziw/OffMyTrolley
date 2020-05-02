@@ -39,6 +39,23 @@ function allsortedby(sortOption) {
     })
 }
 
+function allsortedbysupermarket() {
+    return allTrolleys.sort(function(a, b) {
+        var thingA = a.supermarket;
+        var thingB = b.supermarket;
+        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
+    })
+}
+
+function toggleViews() {
+    document.getElementsByClassName("add-trolley")[0].classList.toggle("hidden");
+    document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
+    document.getElementsByTagName("trolley-display")[0].classList.toggle("hidden")
+    document.getElementsByTagName("h2")[0].classList.toggle("hidden")
+    new_trolley_form.classList.toggle("hidden")
+}
+
+
 function clearEventListeners(old_element) {
     let new_element = old_element.cloneNode(true);
     old_element.parentNode.replaceChild(new_element, old_element)
