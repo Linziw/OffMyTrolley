@@ -31,31 +31,13 @@ function domDeleteTrolley(trolley) {
     document.getElementById(trolley.id).remove()
 }
 
-//helper methods for sorting selection - very similar? Could be combined??////////////////////////////////////////////
-function allsortedbydistance() {
+function allsortedby(sortOption) {
     return allTrolleys.sort(function(a, b) {
-        var thingA = a.distance;
-        var thingB = b.distance;
+        var thingA = a[sortOption];
+        var thingB = b[sortOption];
         return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
     })
 }
-
-function allsortedbydate() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.date;
-        var thingB = b.date;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
-
-function allsortedbysupermarket() {
-    return allTrolleys.sort(function(a, b) {
-        var thingA = a.supermarket;
-        var thingB = b.supermarket;
-        return (thingA < thingB) ? -1 : (thingA > thingB) ? 1 : 0;
-    })
-}
-
 
 function clearEventListeners(old_element) {
     let new_element = old_element.cloneNode(true);

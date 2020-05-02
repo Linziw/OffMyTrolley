@@ -143,11 +143,11 @@ function loadMainPage(user, form) {
     document.getElementsByClassName("logout")[0].classList.toggle("hidden")
 }
 
-function displayTrolleys(sortOption = allsortedbydistance()) {
+function displayTrolleys(sortOption = "distance") {
     console.log(allTrolleys);
     let trolleydisplay = document.createElement("trolley-display");
     trolleydisplay.classList.add("center");
-    sortOption.forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
+    allsortedby(sortOption).forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
     document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
 }
@@ -311,17 +311,17 @@ function displaySortButtons() {
     let dateButton = document.getElementById("date")
     let supermarketButton = document.getElementById("supermarket")
 
-    function sortButtonEventListeners(button, sort) {
+    function sortButtonEventListeners(button, sortOption) {
         button.addEventListener("click", function(e) {
             oldTrolleys = document.getElementsByTagName("trolley-display")[0];
             oldTrolleys.parentNode.removeChild(oldTrolleys);
-            displayTrolleys(sort())
+            displayTrolleys(sortOption)
         })
     };
 
-    sortButtonEventListeners(distanceButton, allsortedbydistance);
-    sortButtonEventListeners(dateButton, allsortedbydate);
-    sortButtonEventListeners(supermarketButton, allsortedbysupermarket);
+    sortButtonEventListeners(distanceButton, "distance");
+    sortButtonEventListeners(dateButton, "date");
+    sortButtonEventListeners(supermarketButton, "supermarket");
 }
 
 //almost exactly the same as plusButtonEvents method
