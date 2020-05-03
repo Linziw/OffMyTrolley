@@ -160,12 +160,12 @@ function createTrolleys(trolleys) {
 }
 
 function submitTrolleyForm() {
-    const new_trolley_form = document.getElementById("new_trolley_form")
+    const newTrolleyForm = document.getElementById("new_trolley_form")
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
-    const trolleydisplay = document.getElementsByTagName("trolley-display")[0]
+    const trolleyDisplay = document.getElementsByTagName("trolley-display")[0]
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
     const configObj = {
@@ -184,16 +184,16 @@ function submitTrolleyForm() {
         .then(function(trolley) {
             console.log(trolley)
 
-            let newtrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
+            let newTrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
                 trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude))
-            allTrolleys.push(newtrolley)
+            allTrolleys.push(newTrolley)
             console.log(allTrolleys)
-            trolleydisplay.appendChild(makeCard(newtrolley))
+            trolleyDisplay.appendChild(makeCard(newTrolley))
             toggleViews()
         })
         .catch(function(error) {
             alert("Please try to add a trolley again, this time make sure you fill in every field, and check that the date is in the future!");
-            new_trolley_form.reset()
+            newTrolleyForm.reset()
         })
 
 }
