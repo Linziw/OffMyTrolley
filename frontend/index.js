@@ -21,9 +21,9 @@ function loginEvents() {
 }
 
 function signupEvents() {
-    const signup_button = document.getElementById("signup-button")
-    signup_button.addEventListener("click", () => {
-        signup_button.classList.toggle("hidden")
+    const signupButton = document.getElementById("signup-button")
+    signupButton.addEventListener("click", () => {
+        signupButton.classList.toggle("hidden")
         document.getElementById("login-button").classList.toggle("hidden")
         document.getElementById("signup-form").classList.toggle("hidden")
         document.getElementById("signup-submit").addEventListener("click", (event) => {
