@@ -8,9 +8,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function loginEvents() {
-    const login_button = document.getElementById("login-button");
-    login_button.addEventListener("click", () => {
-        login_button.classList.toggle("hidden");
+    const loginButton = document.getElementById("login-button");
+    loginButton.addEventListener("click", () => {
+        loginButton.classList.toggle("hidden");
         document.getElementById("signup-button").classList.toggle("hidden");
         document.getElementById("login-form").classList.toggle("hidden");
         document.getElementById("login-submit").addEventListener("click", (event) => {
@@ -323,14 +323,14 @@ function editTrolley(trolley) {
     h3.classList.toggle("hidden")
     toggleViews();
 
-    const cancel = document.getElementById("cancel");
+    let cancel = document.getElementById("cancel");
     cancel.addEventListener("click", (event) => {
         event.preventDefault();
         toggleViews()
     })
 
     clearEventListeners(document.getElementById("new_trolley_submit"));
-    const submitButton = document.getElementById("new_trolley_submit");
+    let submitButton = document.getElementById("new_trolley_submit");
     submitButton.addEventListener("click", event => {
         event.preventDefault();
         submitEditTrolleyForm(trolley)
@@ -344,7 +344,7 @@ function submitEditTrolleyForm(trolley) {
     let formSpace = document.getElementById('t-space').value
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
-    const configObj = {
+    let configObj = {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
