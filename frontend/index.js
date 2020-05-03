@@ -360,9 +360,9 @@ function submitEditTrolleyForm(trolley) {
         .then(function(trolley) {
             oldTrolley = allTrolleys.find(Trolley => Trolley.id == trolley.id);
             newTrolley = Object.assign(oldTrolley, trolley);
-            let oldcard = document.getElementById(trolley.id);
-            let newcard = makeCard(newTrolley);
-            oldcard.parentNode.replaceChild(newcard, oldcard)
+            let oldCard = document.getElementById(trolley.id);
+            let newCard = makeCard(newTrolley);
+            oldCard.parentNode.replaceChild(newCard, oldCard)
         })
 
     document.getElementsByTagName("h3")[0].classList.toggle("hidden");
