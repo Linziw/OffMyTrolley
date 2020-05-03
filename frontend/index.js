@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function loginEvents() {
-    let login_button = document.getElementById("login-button");
+    const login_button = document.getElementById("login-button");
     login_button.addEventListener("click", () => {
         login_button.classList.toggle("hidden");
         document.getElementById("signup-button").classList.toggle("hidden");
@@ -21,7 +21,7 @@ function loginEvents() {
 }
 
 function signupEvents() {
-    let signup_button = document.getElementById("signup-button")
+    const signup_button = document.getElementById("signup-button")
     signup_button.addEventListener("click", () => {
         signup_button.classList.toggle("hidden")
         document.getElementById("login-button").classList.toggle("hidden")
@@ -74,12 +74,12 @@ function logoutEvents() {
 }
 
 function submitLoginForm() {
-    let form = document.getElementById("login-form");
+    const form = document.getElementById("login-form");
     let formUsername = document.getElementById('li-username').value;
     let formPassword = document.getElementById('li-password').value;
     let data = { username: formUsername, password: formPassword }
 
-    let configObj = {
+    const configObj = {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function submitLoginForm() {
 }
 
 function submitSignupForm() {
-    let form = document.getElementById("signup-form");
+    const form = document.getElementById("signup-form");
     let formUsername = document.getElementById('su-username').value;
     let formEmail = document.getElementById('su-email').value;
     let formPassword = document.getElementById('su-password').value;
@@ -111,7 +111,7 @@ function submitSignupForm() {
             userLatitude = obj.result.latitude;
 
             let data = { username: formUsername, password: formPassword, email: formEmail, postcode: formPostcode, latitude: userLatitude, longitude: userLongitude }
-            let configObj = {
+            const configObj = {
                 method: 'post',
                 headers: {
                     "Content-Type": "application/json",
@@ -145,7 +145,7 @@ function loadMainPage(user, form) {
 
 function displayTrolleys(sortOption = "distance") {
     console.log(allTrolleys);
-    let trolleydisplay = document.createElement("trolley-display");
+    const trolleydisplay = document.createElement("trolley-display");
     trolleydisplay.classList.add("center");
     allsortedby(sortOption).forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
     document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
@@ -157,13 +157,6 @@ function createTrolleys(trolleys) {
         allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
             trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude)))
     });
-}
-
-function sendMail(trolley) {
-    var link = 'mailto:hello@domain.com?subject=Message from ' +
-        document.getElementById('email_address').value +
-        '&body=' + document.getElementById('email_address').value;
-    window.location.href = link;
 }
 
 function submitTrolleyForm() {
