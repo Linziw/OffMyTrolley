@@ -160,15 +160,15 @@ function createTrolleys(trolleys) {
 }
 
 function submitTrolleyForm() {
-    let new_trolley_form = document.getElementById("new_trolley_form")
+    const new_trolley_form = document.getElementById("new_trolley_form")
     let formDate = document.getElementById('t-date').value
     let formTime = document.getElementById('t-time').value
     let formSupermarket = document.getElementById('t-supermarket').value
     let formSpace = document.getElementById('t-space').value
-    let trolleydisplay = document.getElementsByTagName("trolley-display")[0]
+    const trolleydisplay = document.getElementsByTagName("trolley-display")[0]
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
-    let configObj = {
+    const configObj = {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -184,7 +184,7 @@ function submitTrolleyForm() {
         .then(function(trolley) {
             console.log(trolley)
 
-            newtrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
+            let newtrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
                 trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude))
             allTrolleys.push(newtrolley)
             console.log(allTrolleys)
@@ -207,7 +207,7 @@ function makeCard(trolley) {
             return ""
     }
 
-    let card = document.createElement("div")
+    const card = document.createElement("div")
     card.innerHTML = `
     <div class="card ${toggleColour()}"
       id = "${trolley.id}" >
@@ -245,7 +245,7 @@ function makeCard(trolley) {
   </div>
 </div>`
 
-    let d_button = document.createElement("img")
+    const d_button = document.createElement("img")
     d_button.src = "images/delete.png"
     d_button.classList.add("delete")
     d_button.addEventListener("click", e => {
@@ -253,7 +253,7 @@ function makeCard(trolley) {
         deleteTrolley(trolley)
     })
 
-    let e_button = document.createElement("img")
+    const e_button = document.createElement("img")
     e_button.src = "images/edit.png"
     e_button.classList.add("edit")
     e_button.addEventListener("click", e => {
@@ -274,10 +274,10 @@ function makeCard(trolley) {
 
 
 function deleteTrolley(trolley) {
-    let card = document.getElementById(trolley.id)
+    const card = document.getElementById(trolley.id)
     card.classList.toggle("hidden")
         //post fetch request to delete from database
-    let configObj = {
+    const configObj = {
         method: 'delete',
         headers: {
             "Content-Type": "application/json",
@@ -300,9 +300,9 @@ function deleteTrolley(trolley) {
 
 function displaySortButtons() {
     document.getElementsByClassName("sortButton")[0].classList.toggle("hidden")
-    let distanceButton = document.getElementById("distance")
-    let dateButton = document.getElementById("date")
-    let supermarketButton = document.getElementById("supermarket")
+    const distanceButton = document.getElementById("distance")
+    const dateButton = document.getElementById("date")
+    const supermarketButton = document.getElementById("supermarket")
 
     function sortButtonEventListeners(button, sortOption) {
         button.addEventListener("click", function(e) {
@@ -323,14 +323,14 @@ function editTrolley(trolley) {
     h3.classList.toggle("hidden")
     toggleViews();
 
-    let cancel = document.getElementById("cancel");
+    const cancel = document.getElementById("cancel");
     cancel.addEventListener("click", (event) => {
         event.preventDefault();
         toggleViews()
     })
 
     clearEventListeners(document.getElementById("new_trolley_submit"));
-    let submitButton = document.getElementById("new_trolley_submit");
+    const submitButton = document.getElementById("new_trolley_submit");
     submitButton.addEventListener("click", event => {
         event.preventDefault();
         submitEditTrolleyForm(trolley)
@@ -344,7 +344,7 @@ function submitEditTrolleyForm(trolley) {
     let formSpace = document.getElementById('t-space').value
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
-    let configObj = {
+    const configObj = {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
