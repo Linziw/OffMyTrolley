@@ -48,7 +48,7 @@ function toggleViews() {
 }
 
 
-function clearEventListeners(old_element) {
-    let new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element)
+function clearEventListeners(oldElement) {
+    let newElement = oldElement.cloneNode(true);
+    oldElement.parentNode.replaceChild(newElement, oldElement)
 }
