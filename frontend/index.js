@@ -32,7 +32,7 @@ function signupEvents() {
         })
     });
 }
-//these two above are nearly identical, can refactor together somehow?
+//these two above are nearly identical, can refactor together somehow? Not sure I can.
 function getTrolleys() {
     fetch('http://localhost:3000/trolleys')
         .then(response =>
@@ -145,11 +145,11 @@ function loadMainPage(user, form) {
 
 function displayTrolleys(sortOption = "distance") {
     console.log(allTrolleys);
-    const trolleydisplay = document.createElement("trolley-display");
-    trolleydisplay.classList.add("center");
-    allsortedby(sortOption).forEach(trolley => trolleydisplay.appendChild(makeCard(trolley)));
+    const trolleyDisplay = document.createElement("trolley-display");
+    trolleyDisplay.classList.add("center");
+    allsortedby(sortOption).forEach(trolley => trolleyDisplay.appendChild(makeCard(trolley)));
     document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
-    document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleydisplay, trolleydisplay.nextSibling)
+    document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleyDisplay, trolleyDisplay.nextSibling)
 }
 
 function createTrolleys(trolleys) {
