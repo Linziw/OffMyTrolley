@@ -245,26 +245,26 @@ function makeCard(trolley) {
   </div>
 </div>`
 
-    const d_button = document.createElement("img")
-    d_button.src = "images/delete.png"
-    d_button.classList.add("delete")
-    d_button.addEventListener("click", e => {
+    const deleteButton = document.createElement("img")
+    deleteButton.src = "images/delete.png"
+    deleteButton.classList.add("delete")
+    deleteButton.addEventListener("click", e => {
         alert("You've deleted your trolley");
         deleteTrolley(trolley)
     })
 
-    const e_button = document.createElement("img")
-    e_button.src = "images/edit.png"
-    e_button.classList.add("edit")
-    e_button.addEventListener("click", e => {
+    const editButton = document.createElement("img")
+    editButton.src = "images/edit.png"
+    editButton.classList.add("edit")
+    editButton.addEventListener("click", e => {
         editTrolley(trolley)
     })
 
     if (trolley.user_id == userObject.id) {
         icons = document.createElement("div")
         icons.classList.add("icons")
-        icons.appendChild(e_button);
-        icons.appendChild(d_button);
+        icons.appendChild(editButton);
+        icons.appendChild(deleteButton);
         card.getElementsByClassName("user-card")[0].appendChild(icons)
     }
 
