@@ -15,7 +15,7 @@ class Trolley {
 
     get distance() {
         let R = 6371; // Radius of the earth in km
-        let dLat = deg2rad(parseFloat(userObject.latitude) - this.latitude); // deg2rad below
+        let dLat = deg2rad(parseFloat(userObject.latitude) - this.latitude); // deg2rad in helpers
         let dLon = deg2rad(parseFloat(userObject.longitude) - this.longitude);
         let a =
             Math.sin(dLat / 2) * Math.sin(dLat / 2) +
