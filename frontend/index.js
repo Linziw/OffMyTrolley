@@ -147,7 +147,7 @@ function displayTrolleys(sortOption = "distance") {
     console.log(allTrolleys);
     const trolleyDisplay = document.createElement("trolley-display");
     trolleyDisplay.classList.add("center");
-    allsortedby(sortOption).forEach(trolley => trolleyDisplay.appendChild(makeCard(trolley)));
+    allSortedBy(sortOption).forEach(trolley => trolleyDisplay.appendChild(makeCard(trolley)));
     document.getElementsByClassName("add-trolley")[0].classList.remove("hidden")
     document.getElementsByTagName("footer")[0].parentNode.insertBefore(trolleyDisplay, trolleyDisplay.nextSibling)
 }
@@ -344,7 +344,7 @@ function submitEditTrolleyForm(trolley) {
     let formSpace = document.getElementById('t-space').value
     let data = { user_id: userObject.id, date: formDate, time: formTime, supermarket: formSupermarket, space: formSpace }
 
-    let configObj = {
+    const configObj = {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
