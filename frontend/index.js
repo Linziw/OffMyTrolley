@@ -154,8 +154,7 @@ function displayTrolleys(sortOption = "distance") {
 
 function createTrolleys(trolleys) {
     trolleys.forEach(trolley => {
-        allTrolleys.push(new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
-            trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude)))
+        allTrolleys.push(new Trolley(trolley))
     });
 }
 
@@ -184,8 +183,7 @@ function submitTrolleyForm() {
         .then(function(trolley) {
             console.log(trolley)
 
-            let newTrolley = new Trolley(trolley.id, trolley.date, trolley.time, trolley.supermarket, trolley.space, trolley.user.username, trolley.user.email,
-                trolley.user.postcode, trolley.user_id, parseFloat(trolley.user.latitude), parseFloat(trolley.user.longitude))
+            let newTrolley = new Trolley(trolley)
             allTrolleys.push(newTrolley)
             console.log(allTrolleys)
             trolleyDisplay.appendChild(makeCard(newTrolley))

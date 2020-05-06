@@ -1,16 +1,16 @@
 class Trolley {
-    constructor(id, date, time, supermarket, space, username, email, postcode, user_id, latitude, longitude) {
-        this.id = id
-        this.date = date;
-        this.time = time;
-        this.supermarket = supermarket;
-        this.space = space;
-        this.username = username;
-        this.email = email;
-        this.postcode = postcode;
-        this.user_id = user_id;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    constructor(trolley) {
+        this.id = trolley.id
+        this.date = trolley.date;
+        this.time = trolley.time;
+        this.supermarket = trolley.supermarket;
+        this.space = trolley.space;
+        this.username = trolley.user.username;
+        this.email = trolley.user.email;
+        this.postcode = trolley.user.postcode;
+        this.user_id = trolley.user_id;
+        this.latitude = parseFloat(trolley.user.latitude);
+        this.longitude = parseFloat(trolley.user.longitude);
     }
 
     get distance() {
