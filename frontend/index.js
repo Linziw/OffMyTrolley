@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     loginEvents(); //make login button clickable
     signupEvents(); //make signup button clickable
     getTrolleys(); //fetch the trolleys from RAILS in the backgroud
+    getRatings(); //fetch the ratings from RAILS in the backgroud
     plusButtonEvents(); //make a plus button to add new trolleys (hidden at first)
     logoutEvents(); // make logout button clickable (hidden at first)
 })
@@ -38,6 +39,13 @@ function getTrolleys() {
         .then(response =>
             response.json())
         .then(object => createTrolleys(object))
+}
+
+function getRatings() {
+    fetch('http://localhost:3000/ratings')
+        .then(response =>
+            response.json())
+        .then(object => supermarketScores = object)
 }
 
 function plusButtonEvents() {
