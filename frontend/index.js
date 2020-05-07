@@ -214,7 +214,7 @@ function makeCard(trolley) {
         <div class="user-card">
           <div class="level center">${Math.round(trolley.distance * 10) / 10} km</div>
           <img src="images/${trolley.supermarket}.jpg" class="card-image" id=${toggleColour()}>
-          <div class="points center">5 Stars</div>
+          <div class="points center">${supermarketScores[trolley.supermarket]} ☆ </div>
           <div class="points center">${formatDate(trolley)}</div>
         </div>
         <div class="more-info">

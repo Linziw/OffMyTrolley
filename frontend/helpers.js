@@ -1,6 +1,7 @@
 let allTrolleys = [] // A place to keep all of the Trolley objects once created.
 let toggle = 0 // The counter for toggling the card colours
 let userObject // Where the object for the current user is stored
+let supermarketScores = { Sainsburys: 4, Tesco: 3, Iceland: 2, Morrisons: 1, Lidl: 2, Aldi: 5 }
 
 function deg2rad(deg) {
     return deg * (Math.PI / 180)

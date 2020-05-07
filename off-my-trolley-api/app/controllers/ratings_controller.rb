@@ -1,5 +1,16 @@
 class RatingsController < ApplicationController
 
+  def show
+    allratings = []
+    Rating.all.each do |object| 
+      rating = {}
+      binding.pry
+      rating[:name] = object.name
+      allratings << rating
+    end
+    allratings.inject{|a,b| a.merge(b){|_,x,y| x + y}}
+  end
+
   def create
     newrating = Rating.create(post_params)
     if newrating.persisted?
