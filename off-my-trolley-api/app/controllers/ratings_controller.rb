@@ -15,16 +15,11 @@ class RatingsController < ApplicationController
       occurances[object.name]+= 1
     end
     
-    binding.pry
-    
     averages = {}
     summed.each do |supermarket, sum| 
-      averages[supermarket] = sum/occurances["supermarket"]
+      averages[supermarket] = sum / occurances[supermarket]
     end
-    
-   
-
-    render json:{ Sainsburys: 4, Tesco: 3, Iceland: 2, Morrisons: 1, Lidl: 2, Aldi: 5 }
+    render json:averages
   end
 
   def create
