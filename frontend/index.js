@@ -138,13 +138,11 @@ function submitSignupForm() {
         })
         .catch(function(error) {
             alert("Bad Postcode!");
-            console.log(error.message)
         })
 }
 
 function loadMainPage(user, form) {
     userObject = user;
-    console.log(user);
     displayTrolleys();
     displayUser(user);
     form.classList.toggle("hidden");
@@ -153,7 +151,6 @@ function loadMainPage(user, form) {
 }
 
 function displayTrolleys(sortOption = "distance") {
-    console.log(allTrolleys);
     const trolleyDisplay = document.createElement("trolley-display");
     trolleyDisplay.classList.add("center");
     allSortedBy(sortOption).forEach(trolley => trolleyDisplay.appendChild(makeCard(trolley)));
@@ -190,11 +187,8 @@ function submitTrolleyForm() {
             return response.json();
         })
         .then(function(trolley) {
-            console.log(trolley)
-
             let newTrolley = new Trolley(trolley)
             allTrolleys.push(newTrolley)
-            console.log(allTrolleys)
             trolleyDisplay.appendChild(makeCard(newTrolley))
             toggleViews()
         })
@@ -319,7 +313,6 @@ function submitRating(trolley, stars) {
             return response.json();
         })
         .then(function(confirmation) {
-            console.log(confirmation)
             getRatings()
         })
 }
@@ -348,7 +341,7 @@ function deleteTrolley(trolley) {
 
             oldTrolleyIndex = allTrolleys.findIndex(Trolley => Trolley.id == trolley.id);
             allTrolleys.splice(oldTrolleyIndex, 1);
-            console.log(confirmation)
+
         })
 }
 

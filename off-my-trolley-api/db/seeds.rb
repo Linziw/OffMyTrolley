@@ -15,3 +15,12 @@ trolley_a = Trolley.create(date: "20-08-2020", time: "11:00", supermarket: "Tesc
 trolley_b = Trolley.create(date: "21-08-2020", time: "12:00", supermarket: "Iceland", user: user_b, space: 10)
 trolley_c = Trolley.create(date: "22-08-2020", time: "16:00", supermarket: "Sainsburys", user: user_c, space: 10)
 
+rating_a = Rating.create(name: "Sainsburys", stars: 3)
+rating_b = Rating.create(name: "Tesco", stars: 3)
+rating_c = Rating.create(name: "Iceland", stars: 3)
+rating_d = Rating.create(name: "Lidl", stars: 3)
+rating_e = Rating.create(name: "Morrisons", stars: 3)
+rating_f = Rating.create(name: "Aldi", stars: 3)
+rating_g = Rating.create(name: "Waitrose", stars: 3)
+
+
