@@ -229,7 +229,9 @@ function makeCard(trolley) {
         
             <div class="rate">
            <p class="title">Rate Supermarket</p>
-             <img src= "images/stars.png" class="stars"></div>
+           <div class="rating">
+           <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+           </div></div>
            </div>
         </div>
     </div>

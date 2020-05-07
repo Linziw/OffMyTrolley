@@ -268,8 +268,19 @@ button.logout {
     right: 0px;
 }
 
-.stars {
-    height: 30px;
-    border: none;
-    background: transparent;
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating>span {
+    display: inline-block;
+    position: relative;
+    width: 0.8em;
+}
+
+.rating>span:hover:before,
+.rating>span:hover~span:before {
+    content: "\2605";
+    position: absolute;
 }
