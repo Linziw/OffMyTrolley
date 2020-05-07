@@ -219,20 +219,22 @@ function makeCard(trolley) {
         <div class="more-info">
           <h1>${trolley.username}</h1>
           <p>"${trolley.username} has a delivery slot on ${formatDate(trolley)} at ${formatTime(trolley)} from ${trolley.supermarket}.  They have space for ${trolley.space} more items, please contact them to see if they can add your items!"</p>
-          <div class="coords">    
-          </div>
-        <div class="coords"> 
+          
+         <div class="stats">
+            <div class="contact">
+              <p class="title">Contact</p>
+                <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
+                 please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.username}">@</a>
+            </div>
+        
+            <div class="rate">
+           <p class="title">Rate Supermarket</p>
+             <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
+              please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.username}">@</a></div>
+           </div>
         </div>
-        <div class="stats">
-        <div>
-          <div class="title">Contact</div>
-          <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
-          please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.username}">@</a></div>
-        </div>
-        <div>
-        </div>
-      </div>
     </div>
+
   <div class="general">
     <h1>${trolley.username}</h1>
     <span>Supermarket - </span>
@@ -246,6 +248,14 @@ function makeCard(trolley) {
     </div>
   </div>
 </div>`
+
+    const upvoteButton = document.createElement("button")
+    upvoteButton.addEventListener("click", e => {
+        upvoteEvent(trolley)
+    })
+
+
+
 
     const deleteButton = document.createElement("img")
     deleteButton.src = "images/delete.png"
