@@ -73,6 +73,7 @@ function logoutEvents() {
     })
 }
 
+
 function submitLoginForm() {
     const form = document.getElementById("login-form");
     let formUsername = document.getElementById('li-username').value;
@@ -230,7 +231,6 @@ function makeCard(trolley) {
             <div class="rate">
            <p class="title">Rate Supermarket</p>
            <div class="rating">
-           <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
            </div></div>
            </div>
         </div>
@@ -250,11 +250,9 @@ function makeCard(trolley) {
   </div>
 </div>`
 
-    const upvoteButton = document.createElement("button")
-    upvoteButton.addEventListener("click", e => {
-        upvoteEvent(trolley)
-    })
-
+    function hello() {
+        alert("hi")
+    }
 
 
 
@@ -272,6 +270,19 @@ function makeCard(trolley) {
     editButton.addEventListener("click", e => {
         editTrolley(trolley)
     })
+
+    function createStars() {
+        for (i = 0; i < 5; i++) {
+            const star = document.createElement("span")
+            star.innerText = "☆"
+            star.addEventListener("click", e => {
+                console.log("clicked")
+            })
+            card.getElementsByClassName("rating")[0].appendChild(star)
+        }
+    }
+
+    createStars()
 
     if (trolley.user_id == userObject.id) {
         icons = document.createElement("div")
