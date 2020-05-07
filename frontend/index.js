@@ -213,6 +213,7 @@ function makeCard(trolley) {
         <div class="user-card">
           <div class="level center">${Math.round(trolley.distance * 10) / 10} km</div>
           <img src="images/${trolley.supermarket}.jpg" class="card-image" id=${toggleColour()}>
+          <div class="points center">5 Stars</div>
           <div class="points center">${formatDate(trolley)}</div>
         </div>
         <div class="more-info">
@@ -228,6 +229,8 @@ function makeCard(trolley) {
           <a class="value" href="mailto:${trolley.email}?subject=Email from OffMyTrolley&amp;body=Hi ${trolley.username}, I would love to order a few groceries using the spare slots you have please, here is a list of what i'd like ....
           please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.username}">@</a></div>
         </div>
+        <div>
+        </div>
       </div>
     </div>
   <div class="general">
@@ -235,7 +238,8 @@ function makeCard(trolley) {
     <span>Supermarket - </span>
     <span>${trolley.supermarket}</span><br><br>
     <span>Postcode - </span>
-    <span>${trolley.postcode}</span>
+    <span>${trolley.postcode}</span><br>
+    
     <div class="stats">
       <div class="title">Item spaces</div>
       <div class="value">${trolley.space}</div>
@@ -268,6 +272,10 @@ function makeCard(trolley) {
 
     toggle += 1
     return card
+}
+
+function upvoteEvent() {
+
 }
 
 
