@@ -267,3 +267,9 @@ button.logout {
     top: 0px;
     right: 0px;
 }
+
+.stars {
+    height: 30px;
+    border: none;
+    background: transparent;
+}
