@@ -250,11 +250,6 @@ function makeCard(trolley) {
   </div>
 </div>`
 
-    function hello() {
-        alert("hi")
-    }
-
-
 
     const deleteButton = document.createElement("img")
     deleteButton.src = "images/delete.png"
@@ -272,11 +267,13 @@ function makeCard(trolley) {
     })
 
     function createStars() {
-        for (i = 0; i < 5; i++) {
+        for (i = 5; i > 0; i--) {
             const star = document.createElement("span")
             star.innerText = "☆"
+            star.id = `star-${i}`
+            let score = i
             star.addEventListener("click", e => {
-                console.log("clicked")
+                submitRating(trolley, score)
             })
             card.getElementsByClassName("rating")[0].appendChild(star)
         }
@@ -296,8 +293,8 @@ function makeCard(trolley) {
     return card
 }
 
-function upvoteEvent() {
-
+function submitRating(trolley, score) {
+    alert(`trolley id ${trolley.id} scores ${score}`)
 }
 
 
@@ -314,7 +311,8 @@ function deleteTrolley(trolley) {
         body: JSON.stringify(trolley)
     };
 
-    fetch(`http://localhost:3000/trolleys/${trolley.id}`, configObj)
+    fetch(`
+        http: //localhost:3000/trolleys/${trolley.id}`, configObj)
         .then(function(response) {
             return response.json();
         })
