@@ -294,8 +294,26 @@ function makeCard(trolley) {
 }
 
 function submitRating(trolley, score) {
-    alert(`trolley id ${trolley.id} scores ${score}`)
+    alert(`Thanks for your vote! Supermarket ${trolley.supermarket} scores ${score}`)
+    const configObj = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(trolley.supermarket, score)
+    };
+
+    fetch(`
+        http: //localhost:3000/supermarkets`, configObj)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(confirmation) {
+            console.log("something has worked")
+        })
 }
+
 
 
 function deleteTrolley(trolley) {
