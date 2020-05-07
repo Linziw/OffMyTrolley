@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :trolleys
   resources :users
+  resources :ratings
 
   get '/logout', to: 'sessions#destroy'
   post '/login', to: 'sessions#new'

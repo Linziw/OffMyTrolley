@@ -293,24 +293,25 @@ function makeCard(trolley) {
     return card
 }
 
-function submitRating(trolley, score) {
-    alert(`Thanks for your vote! Supermarket ${trolley.supermarket} scores ${score}`)
+function submitRating(trolley, stars) {
+    alert(`Thanks for your vote! Supermarket ${trolley.supermarket} scores ${stars} stars`)
+    let data = { name: trolley.supermarket, stars: stars }
     const configObj = {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        body: JSON.stringify(trolley.supermarket, score)
+        body: JSON.stringify(data)
     };
 
     fetch(`
-        http: //localhost:3000/supermarkets`, configObj)
+        http://localhost:3000/ratings`, configObj)
         .then(function(response) {
             return response.json();
         })
         .then(function(confirmation) {
-            console.log("something has worked")
+            console.log(confirmation)
         })
 }
 
