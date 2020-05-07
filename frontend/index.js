@@ -320,6 +320,7 @@ function submitRating(trolley, stars) {
         })
         .then(function(confirmation) {
             console.log(confirmation)
+            getRatings()
         })
 }
 
