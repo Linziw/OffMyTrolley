@@ -39,6 +39,10 @@ function getTrolleys() {
         .then(response =>
             response.json())
         .then(object => createTrolleys(object))
+        .catch(function(error) {
+            alert("Sorry, there is a problem with the server right now, please try again later!");
+        })
+
 }
 
 function getRatings() {
@@ -46,6 +50,9 @@ function getRatings() {
         .then(response =>
             response.json())
         .then(object => supermarketScores = object)
+        .catch(function(error) {
+            alert("Sorry, there is a problem with the server right now, please try to rate later!");
+        })
 }
 
 function plusButtonEvents() {
@@ -76,7 +83,7 @@ function logoutEvents() {
                 alert(result.message)
             })
             .catch(function(error) {
-                alert("We cannot log you out, you are doomed to stay forever, so sorry...");
+                alert("We cannot log you out, you are doomed to stay forever, so very very sorry...");
             })
     })
 }
@@ -134,10 +141,13 @@ function submitSignupForm() {
                 .then(result =>
                     loadMainPage(result, form)
                 )
+                .catch(function(error) {
+                    alert("Sorry, We cannot sign you up right now, please try again later!");
+                })
 
         })
         .catch(function(error) {
-            alert("Bad Postcode!");
+            alert("Postcode not recognised, sorry!");
         })
 }
 
@@ -257,7 +267,6 @@ function makeCard(trolley) {
     deleteButton.src = "images/delete.png"
     deleteButton.classList.add("delete")
     deleteButton.addEventListener("click", e => {
-        alert("You've deleted your trolley");
         deleteTrolley(trolley)
     })
 
@@ -296,7 +305,7 @@ function makeCard(trolley) {
 }
 
 function submitRating(trolley, stars) {
-    alert(`Thanks for your vote! Supermarket ${trolley.supermarket} scores ${stars} stars`)
+
     let data = { name: trolley.supermarket, stars: stars }
     const configObj = {
         method: 'POST',
@@ -313,7 +322,11 @@ function submitRating(trolley, stars) {
             return response.json();
         })
         .then(function(confirmation) {
+            alert(`Thanks for your vote! Supermarket ${trolley.supermarket} scores ${stars} stars`)
             getRatings()
+        })
+        .catch(function(error) {
+            alert("Sorry, We cannot add your rating right now, please try again later!");
         })
 }
 
@@ -321,8 +334,8 @@ function submitRating(trolley, stars) {
 
 function deleteTrolley(trolley) {
     const card = document.getElementById(trolley.id)
-    card.classList.toggle("hidden")
-        //post fetch request to delete from database
+
+    //post fetch request to delete from database
     const configObj = {
         method: 'delete',
         headers: {
@@ -341,8 +354,14 @@ function deleteTrolley(trolley) {
 
             oldTrolleyIndex = allTrolleys.findIndex(Trolley => Trolley.id == trolley.id);
             allTrolleys.splice(oldTrolleyIndex, 1);
+            card.classList.toggle("hidden")
+            alert("You've deleted your trolley")
 
         })
+        .catch(function(error) {
+            alert("Sorry, We cannot delete your trolley right now, please try again later!");
+        })
+
 }
 
 function displaySortButtons() {
@@ -410,6 +429,9 @@ function submitEditTrolleyForm(trolley) {
             let oldCard = document.getElementById(trolley.id);
             let newCard = makeCard(newTrolley);
             oldCard.parentNode.replaceChild(newCard, oldCard)
+        })
+        .catch(function(error) {
+            alert("Sorry, We cannot edit your trolley right now, please try again later!");
         })
 
     document.getElementsByTagName("h3")[0].classList.toggle("hidden");
