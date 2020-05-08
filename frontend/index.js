@@ -240,7 +240,7 @@ function makeCard(trolley) {
                  please reply to this email to confirm and arrange details, then login and delete your trolley from the website to prevent further enquiries, thanks! ${userObject.username}">@</a>
             </div>
         
-            <div class="rate">
+            <div class="rate hidden">
            <p class="title">Rate Supermarket</p>
            <div class="rating">
            </div></div>
@@ -287,12 +287,14 @@ function makeCard(trolley) {
                 submitRating(trolley, score)
             })
             card.getElementsByClassName("rating")[0].appendChild(star)
+            card.getElementsByClassName("rate")[0].classList.remove("hidden")
         }
     }
 
-    createStars()
+
 
     if (trolley.user_id == userObject.id) {
+        createStars()
         icons = document.createElement("div")
         icons.classList.add("icons")
         icons.appendChild(editButton);
